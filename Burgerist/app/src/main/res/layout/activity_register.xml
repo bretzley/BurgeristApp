@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0085CD"
+    tools:context="com.example.bretz.burgerist.RegisterActivity">
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="169dp"
+        android:layout_height="39dp"
+        android:text="¡Bienvenido!"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="11dp" />
+
+    <TextView
+        android:id="@+id/txtRegisterInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regístrate llenando la información solicitada."
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+    <ImageView
+        android:id="@+id/ivandroid"
+        android:layout_width="161dp"
+        android:layout_height="159dp"
+        app:srcCompat="@mipmap/ic_launcher_round"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <EditText
+        android:id="@+id/edtUserContract"
+        android:layout_width="277dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="Ingresa tu número de contrato"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="287dp" />
+
+    <EditText
+        android:id="@+id/edtUserEmail"
+        android:layout_width="277dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="Ingresa tu correo electrónico"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="331dp" />
+
+    <EditText
+        android:id="@+id/edtUserPass"
+        android:layout_width="277dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="Ingresa tu contraseña"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="378dp" />
+
+    <Button
+        android:id="@+id/btRegisterUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrar"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="430dp" />
+
+    <ImageView
+        android:id="@+id/iconEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="333dp" />
+
+    <ImageView
+        android:id="@+id/iconPass"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="379dp" />
+
+    <ImageView
+        android:id="@+id/iconContract"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="280dp" />
+</android.support.constraint.ConstraintLayout>
