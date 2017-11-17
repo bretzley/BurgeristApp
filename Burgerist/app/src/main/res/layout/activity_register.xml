@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +14,11 @@
         android:text="¡Bienvenido!"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="11dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtRegisterInfo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:id="@+id/txtRegisterInfo"
@@ -23,7 +27,9 @@
         android:text="Regístrate llenando la información solicitada."
         android:textSize="18sp"
         tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="50dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ivandroid"
+        android:layout_below="@+id/txtWelcome"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/ivandroid"
@@ -31,7 +37,9 @@
         android:layout_height="159dp"
         app:srcCompat="@mipmap/ic_launcher_round"
         tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="96dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edtUserContract"
+        android:layout_below="@+id/txtRegisterInfo"
+        android:layout_alignEnd="@+id/txtWelcome" />
 
     <EditText
         android:id="@+id/edtUserContract"
@@ -41,7 +49,9 @@
         android:hint="Ingresa tu número de contrato"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="287dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edtUserEmail"
+        android:layout_above="@+id/edtUserEmail"
+        android:layout_alignStart="@+id/edtUserEmail" />
 
     <EditText
         android:id="@+id/edtUserEmail"
@@ -51,7 +61,9 @@
         android:hint="Ingresa tu correo electrónico"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edtUserPass"
+        android:layout_above="@+id/edtUserPass"
+        android:layout_alignStart="@+id/edtUserPass" />
 
     <EditText
         android:id="@+id/edtUserPass"
@@ -61,7 +73,11 @@
         android:hint="Ingresa tu contraseña"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="378dp" />
+        android:layout_marginBottom="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
+        android:layout_above="@+id/btRegisterUser"
+        android:layout_alignEnd="@+id/txtRegisterInfo"
+        android:layout_marginEnd="13dp" />
 
     <Button
         android:id="@+id/btRegisterUser"
@@ -69,29 +85,41 @@
         android:layout_height="wrap_content"
         android:text="Registrar"
         tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="430dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/iconEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_dialog_email"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="333dp" />
+        tools:layout_editor_absoluteY="333dp"
+        app:layout_constraintRight_toLeftOf="@+id/edtUserEmail"
+        android:layout_marginRight="8dp"
+        android:layout_above="@+id/edtUserPass"
+        android:layout_toStartOf="@+id/edtUserEmail" />
 
     <ImageView
         android:id="@+id/iconPass"
         android:layout_width="34dp"
         android:layout_height="34dp"
         app:srcCompat="@android:drawable/ic_lock_idle_lock"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="379dp" />
+        tools:layout_editor_absoluteY="371dp"
+        app:layout_constraintRight_toLeftOf="@+id/edtUserPass"
+        android:layout_marginRight="6dp"
+        android:layout_alignBottom="@+id/edtUserPass"
+        android:layout_toStartOf="@+id/edtUserPass" />
 
     <ImageView
         android:id="@+id/iconContract"
         android:layout_width="48dp"
         android:layout_height="47dp"
         app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="280dp" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="283dp"
+        app:layout_constraintRight_toLeftOf="@+id/edtUserContract"
+        android:layout_marginRight="0dp"
+        android:layout_alignTop="@+id/edtUserContract"
+        android:layout_toStartOf="@+id/edtUserContract" />
+</RelativeLayout>
