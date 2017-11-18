@@ -26,9 +26,9 @@
         android:text="REGÍSTRATE"
         tools:layout_editor_absoluteX="55dp"
         tools:layout_editor_absoluteY="445dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp" />
+        android:layout_marginBottom="35dp"
+        android:layout_above="@+id/btnRegGlobal"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/ivWater"
@@ -79,6 +79,16 @@
             tools:layout_editor_absoluteX="83dp"
             tools:layout_editor_absoluteY="343dp" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btnRegGlobal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnRegister"
+        android:layout_marginBottom="14dp"
+        android:text="Registro manual" />
 
 
 </RelativeLayout>

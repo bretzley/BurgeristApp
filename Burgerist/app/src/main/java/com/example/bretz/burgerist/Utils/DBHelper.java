@@ -31,6 +31,7 @@ public class DBHelper {
                     DBUtils.CUSTOMER_PHONE,
                     DBUtils.CUSTOMER_IMAGE
             };
+
     private String[] EMPLOYEE_TABLE_COLUMNS =
             {
                     DBUtils.EMPLOYEE_BASEID,
@@ -49,7 +50,8 @@ public class DBHelper {
         dbHelper = new DBUtils(context);
     }
     public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        try (SQLiteDatabase sqLiteDatabase = database = dbHelper.getWritableDatabase()) {
+        }
     }
     public void close() {
         database.close();

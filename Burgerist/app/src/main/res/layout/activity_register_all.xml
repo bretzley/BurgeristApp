@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bretz.burgerist.RegisterAllActivity">
+    tools:context="com.example.bretz.burgerist.RegisterAllActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <RadioGroup
+        android:id="@+id/rgRegAny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbUserReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar usuario cliente" />
+
+        <RadioButton
+            android:id="@+id/rbTecReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar usuario tecnico" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edtUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el Id del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserFName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el primer nombre del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserMName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el segundo nombre del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtLName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el apellido del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el correo electronico del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa la contraseña del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserAdress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa la direccion del usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ingresa el telefono del usuario"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnRegisterAny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRAR USUARIO" />
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Regresar al Inicio" />
+
+
+</LinearLayout>
