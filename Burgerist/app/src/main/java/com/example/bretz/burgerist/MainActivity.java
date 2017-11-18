@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentLogin= new Intent(getApplicationContext(), UserLoginActivity.class);
-                boolean checked = ((RadioButton)v).isChecked();
 
                 /*switch (v.getId()){
                     case R.id.rbTec:

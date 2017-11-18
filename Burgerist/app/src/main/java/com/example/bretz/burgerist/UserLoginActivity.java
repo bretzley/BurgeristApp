@@ -33,12 +33,12 @@ public class UserLoginActivity extends AppCompatActivity {
                 }
 
                 if (edtUser.getText().toString().equals("user") && edtPass.getText().toString().equals("pass")){
-                    Toast.makeText(getApplicationContext(),"Username and password is correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Usuario o contraseña son INCORRECTOS", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                     startActivity(intent);
 
                 }
-                else Toast.makeText(getApplicationContext(), "Username and password is NOT correct", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "Usuario o contraseña son INCORRECTOS", Toast.LENGTH_SHORT).show();
             }
         });
     }
