@@ -77,29 +77,53 @@ public class DBHelper {
         return customer;
     }
 
-    public Customer getCustomer(int ContractNumber, String Email, String Password) {
-        ContentValues values = new ContentValues();
-        if(DBUtils.CUSTOMER_CONTRACT.equals(ContractNumber))
-        {
-            values.get(DBUtils.CUSTOMER_ID);
-            values.get(DBUtils.CUSTOMER_CONTRACT);
-            values.get(DBUtils.CUSTOMER_FIRSTNAME);
-            values.get(DBUtils.CUSTOMER_MIDDLENAME);
-            values.get(DBUtils.CUSTOMER_LASTNAME);
-            values.put(DBUtils.CUSTOMER_EMAIL, Email);
-            values.put(DBUtils.CUSTOMER_PASSWORD, Password);
-            values.get(DBUtils.CUSTOMER_ADDRESS);
-            values.get(DBUtils.CUSTOMER_PHONE);
-            values.get(DBUtils.CUSTOMER_IMAGE);
-        }
-
-        long customerId = database.insert(DBUtils.CUSTOMER_TABLE, null, values);
+    public Customer getCustomer(String Email) {
         Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE, CUSTOMER_TABLE_COLUMNS,
-                DBUtils.CUSTOMER_CONTRACT + " = " + ContractNumber, null, null, null, null);
+                DBUtils.CUSTOMER_EMAIL + " = " + Email, null, null, null, null);
         cursor.moveToFirst();
         Customer customer = parseCustomer(cursor);
         cursor.close();
         return customer;
+    }
+
+    public String registerCustomer(int ContranctNumber, String Email, String Password){
+        String message = "";
+        Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE,
+                CUSTOMER_TABLE_COLUMNS,
+                DBUtils.CUSTOMER_CONTRACT + " = " + ContranctNumber,
+                null, null, null, null);
+        if (cursor.getCount() == 1) {
+            cursor.moveToFirst();
+            Customer c = parseCustomer(cursor);
+            if (c.getContractNumber().equals(ContranctNumber + "")) {
+                c.setEmail(Email);
+                c.setPassword(Password);
+                database.update(DBUtils.CUSTOMER_TABLE, getCustomerValues(c), DBUtils.CUSTOMER_ID + " = " + c.getId(), null);
+                message = "Success";
+            } else {
+                message = "Contract Number Doesn't Exist";
+            }
+        } else {
+            message = "Contract Number Doesn't Exist";
+        }
+        cursor.close();
+        return message;
+    }
+
+    private ContentValues getCustomerValues(Customer oCustomer) {
+        ContentValues values = new ContentValues();
+        values.put(DBUtils.CUSTOMER_ID, oCustomer.getId());
+        values.put(DBUtils.CUSTOMER_CONTRACT, oCustomer.getContractNumber());
+        values.put(DBUtils.CUSTOMER_FIRSTNAME, oCustomer.getFirstName());
+        values.put(DBUtils.CUSTOMER_MIDDLENAME, "");
+        values.put(DBUtils.CUSTOMER_LASTNAME, oCustomer.getLastName());
+        values.put(DBUtils.CUSTOMER_EMAIL, oCustomer.getEmail());
+        values.put(DBUtils.CUSTOMER_PASSWORD, oCustomer.getPassword());
+        values.put(DBUtils.CUSTOMER_ADDRESS, oCustomer.getAddress());
+        values.put(DBUtils.CUSTOMER_PHONE, oCustomer.getPhone());
+        values.put(DBUtils.CUSTOMER_IMAGE, oCustomer.getCustomerImage());
+
+        return values;
     }
 
     public Employee addEmployee(int Id, int EmployeeCode, String FirstName, String MiddleName, String LastName, String Email, String Password, int Phone, String EmployeeImage) {

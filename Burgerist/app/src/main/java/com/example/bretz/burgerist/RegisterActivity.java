@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText edtUserContract, edtUserEmail, edtUserPass;
-    Button btnRegisterUser;
+    Button btnRegisterUser ;
     DBHelper db;
     ArrayList<Customer> customers;
 
@@ -25,35 +25,39 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        edtUserContract = (EditText)findViewById(R.id.edtUserContract);
-        edtUserEmail = (EditText)findViewById(R.id.edtUserEmail);
-        edtUserPass = (EditText)findViewById(R.id.edtUserPass);
-        btnRegisterUser = (Button)findViewById(R.id.btRegisterUser);
+        edtUserContract = (EditText) findViewById(R.id.edtUserContract);
+        edtUserEmail = (EditText) findViewById(R.id.edtUserEmail);
+        edtUserPass = (EditText) findViewById(R.id.edtUserPass);
+        btnRegisterUser = (Button) findViewById(R.id.btRegisterUser);
         db = new DBHelper(this);
         customers = new ArrayList<>();
 
         btnRegisterUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), UserLoginActivity.class);
-                db.open();
-                int id = customers.size()+1;
-                int contract = Integer.parseInt(edtUserContract.getText().toString());
-                String email = edtUserEmail.getText().toString();
-                String pass = edtUserPass.getText().toString();
-                //------------------TO DO: VALIDAR QUE USUARIO QUE SE REGISTRA EXISTE EN DB Y AGREGAR EMAIL Y PASS A DB
+                if (edtUserContract.getText() == null) {
+                    Toast.makeText(getApplicationContext(), "Please write a contract number", Toast.LENGTH_SHORT).show();
+                } else if (edtUserEmail.getText() == null) {
+                    Toast.makeText(getApplicationContext(), "Please write an email", Toast.LENGTH_SHORT).show();
+                } else if (edtUserPass.getText() == null) {
+                    Toast.makeText(getApplicationContext(), "Please write a password", Toast.LENGTH_SHORT).show();
+                } else {
+                    int contractNumber = Integer.parseInt(edtUserContract.getText().toString());
+                    String email = edtUserEmail.getText().toString();
+                    String password = edtUserPass.getText().toString();
+                    String message = "";
 
-                //db.getCustomer(id, contract, name, middle, last, email, pass, "TEST adresss", 34634, "blah");
-                db.close();
+                    db.open();
+                    message = db.registerCustomer(contractNumber, email, password);
+                    db.close();
 
-                if (edtUserContract.getText()== null) {
-                    Toast.makeText(getApplicationContext(), "Por favor ingresa tu numero de contrato", Toast.LENGTH_SHORT).show();
-                } else if (edtUserEmail.getText()== null) {
-                    Toast.makeText(getApplicationContext(), "Por favor ingresa tu correo electronico", Toast.LENGTH_SHORT).show();
-                } else if (edtUserPass.getText()== null) {
-                    Toast.makeText(getApplicationContext(), "Por favor ingresa tu contraseña", Toast.LENGTH_SHORT).show();
+                    if(message == "Success"){
+                        Intent intent = new Intent(getApplicationContext(), UserLoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
                 }
-                startActivity(intent);
             }
         });
     }
