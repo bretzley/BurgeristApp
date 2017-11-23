@@ -19,7 +19,7 @@ public class DBHelper {
     private SQLiteDatabase database;
     private String[] CUSTOMER_TABLE_COLUMNS =
             {
-                    DBUtils.CUSTOMER_BASEID,
+                    //DBUtils.CUSTOMER_BASEID,
                     DBUtils.CUSTOMER_ID,
                     DBUtils.CUSTOMER_CONTRACT,
                     DBUtils.CUSTOMER_FIRSTNAME,
@@ -49,15 +49,16 @@ public class DBHelper {
     public DBHelper(Context context) {
         dbHelper = new DBUtils(context);
     }
+
     public void open() throws SQLException {
-        try (SQLiteDatabase sqLiteDatabase = database = dbHelper.getWritableDatabase()) {
-        }
+        database = dbHelper.getWritableDatabase();
     }
+
     public void close() {
         database.close();
     }
 
-    public Customer addCustomer(int Id, int ContractNumber, String FirstName, String MiddleName, String LastName, String Email, String Password, String Address, int Phone, String CustomerImage) {
+    public Customer addCustomer(String Id, String ContractNumber, String FirstName, String MiddleName, String LastName, String Email, String Password, String Address, String Phone, String CustomerImage) {
         ContentValues values = new ContentValues();
         values.put(DBUtils.CUSTOMER_ID, Id);
         values.put(DBUtils.CUSTOMER_CONTRACT, ContractNumber);
@@ -72,7 +73,7 @@ public class DBHelper {
 
         long customerId = database.insert(DBUtils.CUSTOMER_TABLE, null, values);
         Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE, CUSTOMER_TABLE_COLUMNS,
-                DBUtils.CUSTOMER_BASEID + " = " + customerId, null, null, null, null);
+                DBUtils.CUSTOMER_ID + " = " + customerId, null, null, null, null);
         cursor.moveToFirst();
         Customer customer = parseCustomer(cursor);
         cursor.close();
@@ -151,15 +152,15 @@ public class DBHelper {
 
     private Customer parseCustomer(Cursor cursor) {
         Customer customer = new Customer();
-        customer.setId(cursor.getInt(cursor.getColumnIndex(DBUtils.CUSTOMER_ID)) + "");
-        customer.setContractNumber(cursor.getInt(cursor.getColumnIndex(DBUtils.CUSTOMER_CONTRACT)) + "");
+        customer.setId(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_ID)) + "");
+        customer.setContractNumber(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_CONTRACT)) + "");
         customer.setFirstName(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_FIRSTNAME)));
         customer.setMiddleName(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_MIDDLENAME)));
         customer.setLastName(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_LASTNAME)));
         customer.setEmail(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_EMAIL)));
         customer.setPassword(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_PASSWORD)));
         customer.setAddress(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_ADDRESS)));
-        customer.setPhone(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_PHONE+ "")));
+        customer.setPhone(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_PHONE)));
         customer.setCustomerImage(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_IMAGE)));
         return customer;
     }

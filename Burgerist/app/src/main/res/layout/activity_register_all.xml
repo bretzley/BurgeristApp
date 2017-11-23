@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ingresa el Id del usuario"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edtUserNumber"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ingresa el"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edtUserFName"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ingresa el correo electronico del usuario"
-        android:inputType="textPersonName" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/edtUserPass"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ingresa la contraseña del usuario"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/edtUserAdress"
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ingresa el telefono del usuario"
-        android:inputType="textPersonName" />
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/btnRegisterAny"

@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBUtils extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME ="Burgerista";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
 
     //-----------------CUSTOMER TABLE---------------------------
     public static final String CUSTOMER_TABLE="Customer";
@@ -44,16 +44,16 @@ public class DBUtils extends SQLiteOpenHelper{
 
     public static final String CREATE_CUSTOMERS =
             "CREATE TABLE "+ CUSTOMER_TABLE + "(" +
-                    CUSTOMER_BASEID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    CUSTOMER_ID + " INTEGER, " +
-                    CUSTOMER_CONTRACT + " INTEGER, " +
+                    //CUSTOMER_BASEID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    CUSTOMER_ID + " TEXT, " +
+                    CUSTOMER_CONTRACT + " TEXT, " +
                     CUSTOMER_FIRSTNAME + " TEXT," +
                     CUSTOMER_MIDDLENAME + " TEXT," +
                     CUSTOMER_LASTNAME + " TEXT," +
                     CUSTOMER_EMAIL + " TEXT," +
                     CUSTOMER_PASSWORD + " TEXT," +
                     CUSTOMER_ADDRESS + " TEXT," +
-                    CUSTOMER_PHONE + " INTEGER," +
+                    CUSTOMER_PHONE + " TEXT," +
                     CUSTOMER_IMAGE + " TEXT)";
 
     public static final String CREATE_EMPLOYEES =
