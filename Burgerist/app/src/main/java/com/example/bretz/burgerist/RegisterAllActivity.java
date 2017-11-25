@@ -60,25 +60,28 @@ public class RegisterAllActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), UserLoginActivity.class);
-                //db.open();
+                db.open();
 
-                boolean checked = ((RadioButton) v).isChecked();
-                int userId = Integer.parseInt(edtUserID.getText().toString());
-                int userNum = Integer.parseInt(edtUserNumber.getText().toString());
+                //boolean checked = ((RadioButton) v).isChecked();
+                //int userId = Integer.parseInt(edtUserID.getText().toString());
+                //int userNum = Integer.parseInt(edtUserNumber.getText().toString());
+                String userId = edtUserID.getText().toString();
+                String userNum = edtUserNumber.getText().toString();
                 String UserFName = edtUserFName.getText().toString();
                 String UserMName = edtUserMName.getText().toString();
                 String UserLName = edtUserLName.getText().toString();
                 String UserEmail = edtUserEmail.getText().toString();
                 String UserPass = edtUserPass.getText().toString();
                 String UserAddress = edtUserAdress.getText().toString();
-                int UserPhone = Integer.parseInt(edtUserPhone.getText().toString());
+                //int UserPhone = Integer.parseInt(edtUserPhone.getText().toString());
+                String UserPhone = edtUserPhone.getText().toString();
 
 
-                /*Customer result = db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "");
+                Customer result = db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "a");
                 Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_LONG).show();// TODO Auto-generated method stub
 
 
-                if (edtUserID.getText() == null) {
+                /*if (edtUserID.getText() == null) {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa el id del usuario", Toast.LENGTH_SHORT).show();
                 } else if (edtUserNumber.getText() == null) {
                     switch (v.getId()) {
@@ -103,25 +106,15 @@ public class RegisterAllActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa el correo electronico", Toast.LENGTH_SHORT).show();
                 } else if (edtUserPass.getText() == null) {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa la contraseña", Toast.LENGTH_SHORT).show();
-                } else if (edtUserAdress.getText() == null) {
-                    switch (v.getId()) {
-                        case R.id.rbUserReg:
-                            if (checked) {
-                                Toast.makeText(getApplicationContext(), "Por favor ingresa la direccion del usuario", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-                    }
                 } else if (edtUserPhone.getText() == null) {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa el telefono del usuario", Toast.LENGTH_SHORT).show();
                 }
 
                 switch (v.getId()) {
                     case R.id.rbUserReg:
-                        if (checked) {
-                            db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "");
-                        }
+                        db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "");
                         break;
-                    case R.id.rbTecReg:
+                    /*case R.id.rbTecReg:
                         if (checked) {
                             db.addEmployee(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserPhone, "");
                         }
@@ -133,8 +126,8 @@ public class RegisterAllActivity extends AppCompatActivity {
                 //db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "");
                 db.close();
 
-                //customers = this.getIntent.getParcelableArrayListExtra("Parcel");
-                //fillCustomer(customers);
+                /*customers = this.getIntent.getParcelableArrayListExtra("Parcel");
+                fillCustomer(customers);*/
 
                 startActivity(intent);
             }
