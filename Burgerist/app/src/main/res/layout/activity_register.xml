@@ -45,39 +45,39 @@
         android:id="@+id/edtUserContract"
         android:layout_width="277dp"
         android:layout_height="44dp"
+        android:layout_above="@+id/edtUserEmail"
+        android:layout_alignStart="@+id/edtUserEmail"
         android:ems="10"
         android:hint="Ingresa tu número de contrato"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="75dp"
+        android:inputType="textPersonName|number"
         app:layout_constraintBottom_toTopOf="@+id/edtUserEmail"
-        android:layout_above="@+id/edtUserEmail"
-        android:layout_alignStart="@+id/edtUserEmail" />
+        tools:layout_editor_absoluteX="75dp" />
 
     <EditText
         android:id="@+id/edtUserEmail"
         android:layout_width="277dp"
         android:layout_height="44dp"
+        android:layout_above="@+id/edtUserPass"
+        android:layout_alignStart="@+id/edtUserPass"
         android:ems="10"
         android:hint="Ingresa tu correo electrónico"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="75dp"
+        android:inputType="textEmailAddress|textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edtUserPass"
-        android:layout_above="@+id/edtUserPass"
-        android:layout_alignStart="@+id/edtUserPass" />
+        tools:layout_editor_absoluteX="75dp" />
 
     <EditText
         android:id="@+id/edtUserPass"
         android:layout_width="277dp"
         android:layout_height="44dp"
-        android:ems="10"
-        android:hint="Ingresa tu contraseña"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="75dp"
-        android:layout_marginBottom="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
         android:layout_above="@+id/btRegisterUser"
         android:layout_alignEnd="@+id/txtRegisterInfo"
-        android:layout_marginEnd="13dp" />
+        android:layout_marginBottom="49dp"
+        android:layout_marginEnd="13dp"
+        android:ems="10"
+        android:hint="Ingresa tu contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
+        tools:layout_editor_absoluteX="75dp" />
 
     <Button
         android:id="@+id/btRegisterUser"
