@@ -23,7 +23,6 @@ public class UserLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_login);
 
         db = new DBHelper(this);
-
         btnUserLog = (Button)findViewById(R.id.btnUserLogin);
         edtPass = (EditText)findViewById(R.id.edtLoginUserPass);
         edtUser = (EditText)findViewById(R.id.edtLoginUser);
@@ -37,12 +36,17 @@ public class UserLoginActivity extends AppCompatActivity {
                 } else if (edtPass.getText()== null) {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa tu contraseña", Toast.LENGTH_SHORT).show();
                 }else {
-                    Customer c = db.getCustomer(edtUser.getText().toString());
-                    if (edtUser.getText().toString().equals(c.getEmail()) && edtPass.getText().toString().equals(c.getPassword())){
-                        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                        startActivity(intent);
-                    }
-                    else Toast.makeText(getApplicationContext(), "Usuario o contraseña son INCORRECTOS", Toast.LENGTH_SHORT).show();
+                    try{
+                        Customer c = db.getCustomer(edtUser.getText().toString());
+
+                        if (edtUser.getText().toString().equals(c.getEmail()) && edtPass.getText().toString().equals(c.getPassword())){
+                            Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                            intent.putExtra("Contract", c.getContractNumber());
+                            intent.putExtra("Email", c.getEmail());
+                            startActivity(intent);
+                        }
+                        else Toast.makeText(getApplicationContext(), "Usuario o contraseña son INCORRECTOS", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){}
                 }
             }
         });
