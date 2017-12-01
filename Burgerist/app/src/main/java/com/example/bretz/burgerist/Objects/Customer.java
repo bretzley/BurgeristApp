@@ -8,67 +8,55 @@ import android.os.Parcelable;
  */
 
 public class Customer implements Parcelable{
-    private String CustomerId;
     private String Id;
-    private String ContractNumber;
-    private String FirstName;
-    private String MiddleName;
+    private int ContractNumber;
+    private String Name;
     private String LastName;
     private String Email;
     private String Password;
     private String Address;
-    private String Phone;
+    private int Phone;
     private String CustomerImage;
-
+    private Boolean Registered;
 
     public Customer(Parcel in) {
-        this.CustomerId = in.readString();
         this.Id = in.readString();
-        this.ContractNumber = in.readString();
-        this.FirstName = in.readString();
-        this.MiddleName = in.readString();
+        this.ContractNumber = in.readInt();
+        this.Name = in.readString();
         this.LastName = in.readString();
         this.Email = in.readString();
         this.Password = in.readString();
         this.Address = in.readString();
-        this.Phone = in.readString();
+        this.Phone = in.readInt();
         this.CustomerImage = in.readString();
+        this.Registered = in.readByte() != 0;
     }
 
     public Customer(){}
 
-    public Customer(String CustomerId, String Id, String ContractNumber, String FirstName, String MiddleName, String LastName, String Email, String Password, String Address, String Phone, String CustomerImage){
-        this.CustomerId = CustomerId;
+    public Customer(String Id, int ContractNumber, String Name, String LastName, String Email, String Password, String Address, int Phone, String CustomerImage, Boolean Registered){
         this.Id = Id;
         this.ContractNumber = ContractNumber;
-        this.FirstName = FirstName;
-        this.MiddleName = MiddleName;
+        this.Name = Name;
         this.LastName = LastName;
         this.Email = Email;
         this.Password = Password;
         this.Address = Address;
         this.Phone  = Phone;
         this.CustomerImage = CustomerImage;
-    }
-
-    public String getCustomerId() {
-        return CustomerId;
+        this.Registered = Registered;
     }
 
     public String getId() {
         return Id;
     }
 
-    public String getContractNumber() {
+    public int getContractNumber() {
         return ContractNumber;
     }
 
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public String getMiddleName() {
-        return MiddleName;
+    public String getName() {
+        return Name;
     }
 
     public String getLastName() {
@@ -87,7 +75,7 @@ public class Customer implements Parcelable{
         return Address;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return Phone;
     }
 
@@ -95,24 +83,20 @@ public class Customer implements Parcelable{
         return CustomerImage;
     }
 
-    public void setCustomerId(String customerId) {
-        CustomerId = customerId;
+    public Boolean getRegistered() {
+        return Registered;
     }
 
     public void setId(String id) {
         Id = id;
     }
 
-    public void setContractNumber(String contractNumber) {
+    public void setContractNumber(int contractNumber) {
         ContractNumber = contractNumber;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
+    public void setName(String name) {
+        Name = name;
     }
 
     public void setLastName(String lastName) {
@@ -131,12 +115,16 @@ public class Customer implements Parcelable{
         Address = address;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         Phone = phone;
     }
 
     public void setCustomerImage(String customerImage) {
         CustomerImage = customerImage;
+    }
+
+    public void setRegistered(Boolean registered) {
+        Registered = registered;
     }
 
     @Override
@@ -146,17 +134,16 @@ public class Customer implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(CustomerId);
         dest.writeString(Id);
-        dest.writeString(ContractNumber);
-        dest.writeString(FirstName);
-        dest.writeString(MiddleName);
+        dest.writeInt(ContractNumber);
+        dest.writeString(Name);
         dest.writeString(LastName);
         dest.writeString(Email);
         dest.writeString(Password);
         dest.writeString(Address);
-        dest.writeString(Phone);
+        dest.writeInt(Phone);
         dest.writeString(CustomerImage);
+        dest.writeByte((byte) (Registered ? 1 : 0));
     }
 
     public static final Creator<Customer> CREATOR = new Creator<Customer>() {

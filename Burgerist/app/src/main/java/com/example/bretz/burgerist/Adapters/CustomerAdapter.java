@@ -26,9 +26,9 @@ public class CustomerAdapter extends ArrayAdapter<Customer>{
         TextView txtEmail = (TextView) oView.findViewById(R.id.txtUserEmail);
 
         final Customer customer = this.getItem(position);
-        txtName.setText(customer.getFirstName().toString()+" "+customer.getLastName().toString());
-        txtContract.setText(customer.getContractNumber().toString()+"");
-        txtPhone.setText(customer.getPhone().toString()+"");
+        txtName.setText(customer.getName().toString() + " " + customer.getLastName().toString());
+        txtContract.setText(customer.getContractNumber() + "");
+        txtPhone.setText(customer.getPhone() + "");
         txtEmail.setText(customer.getEmail().toString());
         return oView;
     }

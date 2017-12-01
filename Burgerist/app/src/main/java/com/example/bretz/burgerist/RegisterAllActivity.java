@@ -65,7 +65,7 @@ public class RegisterAllActivity extends AppCompatActivity {
                 //boolean checked = ((RadioButton) v).isChecked();
                 //int userId = Integer.parseInt(edtUserID.getText().toString());
                 //int userNum = Integer.parseInt(edtUserNumber.getText().toString());
-                String userId = edtUserID.getText().toString();
+                /*String userId = edtUserID.getText().toString();
                 String userNum = edtUserNumber.getText().toString();
                 String UserFName = edtUserFName.getText().toString();
                 String UserMName = edtUserMName.getText().toString();
@@ -78,7 +78,7 @@ public class RegisterAllActivity extends AppCompatActivity {
 
 
                 Customer result = db.addCustomer(userId, userNum, UserFName, UserMName, UserLName, UserEmail, UserPass, UserAddress, UserPhone, "a");
-                Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_LONG).show();// TODO Auto-generated method stub
+                Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_LONG).show();// TODO Auto-generated method stub*/
 
 
                 /*if (edtUserID.getText() == null) {

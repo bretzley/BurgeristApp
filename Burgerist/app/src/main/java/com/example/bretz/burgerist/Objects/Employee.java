@@ -8,64 +8,53 @@ import android.os.Parcelable;
  */
 
 public class Employee implements Parcelable{
-    private String EmployeeId;
     private String Id;
-    private String EmployeeCode;
-    private String FirstName;
-    private String MiddleName;
+    private int EmployeeCode;
+    private String Name;
     private String LastName;
     private String Email;
     private String Password;
-    private String Phone;
+    private int Phone;
     private String EmployeeImage;
+    private Boolean Registered;
 
 
     public Employee(Parcel in) {
-        this.EmployeeId = in.readString();
         this.Id = in.readString();
-        this.EmployeeCode = in.readString();
-        this.FirstName = in.readString();
-        this.MiddleName = in.readString();
+        this.EmployeeCode = in.readInt();
+        this.Name = in.readString();
         this.LastName = in.readString();
         this.Email = in.readString();
         this.Password = in.readString();
-        this.Phone = in.readString();
+        this.Phone = in.readInt();
         this.EmployeeImage = in.readString();
+        this.Registered = in.readByte() != 0;
     }
 
     public Employee(){}
 
-    public Employee(String EmployeeId, String Id, String EmployeeCode, String FirstName, String MiddleName, String LastName, String Email, String Password, String Phone, String EmployeeImage){
-        this.EmployeeId = EmployeeId;
+    public Employee(String Id, int EmployeeCode, String Name, String LastName, String Email, String Password, int Phone, String EmployeeImage, Boolean Registered){
         this.Id = Id;
         this.EmployeeCode = EmployeeCode;
-        this.FirstName = FirstName;
-        this.MiddleName = MiddleName;
+        this.Name = Name;
         this.LastName = LastName;
         this.Email = Email;
         this.Password = Password;
         this.Phone  = Phone;
         this.EmployeeImage = EmployeeImage;
-    }
-
-    public String getEmployeeId() {
-        return EmployeeId;
+        this.Registered = Registered;
     }
 
     public String getId() {
         return Id;
     }
 
-    public String getEmployeeCode() {
+    public int getEmployeeCode() {
         return EmployeeCode;
     }
 
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public String getMiddleName() {
-        return MiddleName;
+    public String getName() {
+        return Name;
     }
 
     public String getLastName() {
@@ -80,7 +69,7 @@ public class Employee implements Parcelable{
         return Password;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return Phone;
     }
 
@@ -88,24 +77,20 @@ public class Employee implements Parcelable{
         return EmployeeImage;
     }
 
-    public void setEmployeeId(String employeeId) {
-        EmployeeId = employeeId;
+    public Boolean getRegistered() {
+        return Registered;
     }
 
     public void setId(String id) {
         Id = id;
     }
 
-    public void setEmployeeCode(String employeeCode) {
+    public void setEmployeeCode(int employeeCode) {
         EmployeeCode = employeeCode;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
+    public void setFirstName(String name) {
+        Name = name;
     }
 
     public void setLastName(String lastName) {
@@ -120,12 +105,16 @@ public class Employee implements Parcelable{
         Password = password;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         Phone = phone;
     }
 
     public void setEmployeeImage(String employeeImage) {
         EmployeeImage = employeeImage;
+    }
+
+    public void setRegistered(Boolean registered) {
+        Registered = registered;
     }
 
     @Override
@@ -135,16 +124,15 @@ public class Employee implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(EmployeeId);
         dest.writeString(Id);
-        dest.writeString(EmployeeCode);
-        dest.writeString(FirstName);
-        dest.writeString(MiddleName);
+        dest.writeInt(EmployeeCode);
+        dest.writeString(Name);
         dest.writeString(LastName);
         dest.writeString(Email);
         dest.writeString(Password);
-        dest.writeString(Phone);
+        dest.writeInt(Phone);
         dest.writeString(EmployeeImage);
+        dest.writeByte((byte) (Registered ? 1 : 0));
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {

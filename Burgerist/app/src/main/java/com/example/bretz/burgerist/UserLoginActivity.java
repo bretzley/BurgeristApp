@@ -37,7 +37,7 @@ public class UserLoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Por favor ingresa tu contraseña", Toast.LENGTH_SHORT).show();
                 }else {
                     try{
-                        Customer c = db.getCustomer(edtUser.getText().toString());
+                        Customer c = db.getCustomerByContractNumber(edtUser.getText().toString());
 
                         if (edtUser.getText().toString().equals(c.getEmail()) && edtPass.getText().toString().equals(c.getPassword())){
                             Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);

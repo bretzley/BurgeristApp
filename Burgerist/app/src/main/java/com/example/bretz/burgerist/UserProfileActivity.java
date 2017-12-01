@@ -28,9 +28,9 @@ public class UserProfileActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("Email");
         sessionCustomer = new Customer();
 
-        sessionCustomer = db.getCustomer(email);
+        sessionCustomer = db.getCustomerByContractNumber(contract);
 
-        txtUserName.setText(sessionCustomer.getFirstName() + " " + sessionCustomer.getLastName());
+        txtUserName.setText(sessionCustomer.getName() + " " + sessionCustomer.getLastName());
         txtUserContract.setText(sessionCustomer.getContractNumber());
         txtUserPhone.setText(sessionCustomer.getPhone());
         txtUserEmail.setText(sessionCustomer.getEmail());
