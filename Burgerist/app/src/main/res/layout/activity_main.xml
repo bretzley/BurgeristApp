@@ -13,22 +13,26 @@
         android:id="@+id/btnMainLogin"
         android:layout_width="300dp"
         android:layout_height="55dp"
-        android:text="INICIA SESIÓN"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="387dp"
         android:layout_above="@+id/btnRegister"
-        android:layout_alignStart="@+id/btnRegister" />
+        android:layout_alignStart="@+id/btnRegister"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="INICIA SESIÓN"
+        android:textColor="@android:color/background_light"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="387dp" />
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="300dp"
         android:layout_height="55dp"
-        android:text="REGÍSTRATE"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="445dp"
-        android:layout_marginBottom="35dp"
         android:layout_above="@+id/btnRegGlobal"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="REGÍSTRATE"
+        android:textColor="@android:color/background_light"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="445dp" />
 
     <ImageView
         android:id="@+id/ivWater"

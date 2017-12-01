@@ -11,25 +11,27 @@
         android:id="@+id/txtWelcome"
         android:layout_width="169dp"
         android:layout_height="39dp"
-        android:text="¡Bienvenido!"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="108dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txtRegisterInfo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:text="¡Bienvenido!"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtRegisterInfo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="108dp" />
 
     <TextView
         android:id="@+id/txtRegisterInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Regístrate llenando la información solicitada."
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/ivandroid"
         android:layout_below="@+id/txtWelcome"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Regístrate llenando la información solicitada."
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivandroid"
+        tools:layout_editor_absoluteX="11dp" />
 
     <ImageView
         android:id="@+id/ivandroid"
@@ -99,7 +101,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Registrar"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="143dp" />
 
@@ -129,10 +133,9 @@
         android:id="@+id/iconContract"
         android:layout_width="48dp"
         android:layout_height="47dp"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        tools:layout_editor_absoluteY="283dp"
-        app:layout_constraintRight_toLeftOf="@+id/edtUserContract"
-        android:layout_marginRight="0dp"
         android:layout_alignTop="@+id/edtUserContract"
-        android:layout_toStartOf="@+id/edtUserContract" />
+        android:layout_toStartOf="@+id/edtUserContract"
+        app:layout_constraintRight_toLeftOf="@+id/edtUserContract"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        tools:layout_editor_absoluteY="283dp" />
 </RelativeLayout>

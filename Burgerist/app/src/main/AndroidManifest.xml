@@ -22,7 +22,10 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".RegisterAllActivity" />
-        <activity android:name=".AppointmentActivity"></activity>
+        <activity android:name=".AppointmentActivity" />
+        <activity android:name=".AppointmentDetailsActivity" />
+        <activity android:name=".AppointmentHistoryActivity" />
+        <activity android:name=".RequestAppointmentActivity"></activity>
     </application>
 
 </manifest>
