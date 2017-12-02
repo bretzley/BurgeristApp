@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.bretz.burgerist.Objects.Appointment;
 import com.example.bretz.burgerist.Objects.Customer;
 import com.example.bretz.burgerist.Objects.Employee;
 
@@ -44,6 +45,16 @@ public class DBHelper {
                     DBUtils.EMPLOYEE_REGISTERED
             };
 
+    private String[] APPOINTMENT_TABLE_COLUMNS =
+            {
+                    DBUtils.APPOINTMENT_ID,
+                    DBUtils.APPOINTMENT_DATE,
+                    DBUtils.APPOINTMENT_TIMESLOTID,
+                    DBUtils.APPOINTMENT_CUSTOMERID
+
+            };
+
+
     public DBHelper(Context context) {
         dbHelper = new DBUtils(context);
     }
@@ -79,6 +90,26 @@ public class DBHelper {
         Customer customer = parseCustomer(cursor);
         cursor.close();
         return customer;
+    }
+
+    public Appointment addAppointment(String ID, String date, String TimeSlotID, String CustomerID) {
+        ContentValues values = new ContentValues();
+        values.put(DBUtils.APPOINTMENT_ID, ID);
+        values.put(DBUtils.APPOINTMENT_DATE, date);
+        values.put(DBUtils.APPOINTMENT_TIMESLOTID, TimeSlotID);
+        values.put(DBUtils.APPOINTMENT_CUSTOMERID, CustomerID);
+
+
+        database.insert(DBUtils.APPOINTMENT_TABLE, null, values);
+
+        Cursor cursor = database.query(DBUtils.APPOINTMENT_TABLE,
+                APPOINTMENT_TABLE_COLUMNS,
+                DBUtils.CUSTOMER_ID + " =?",
+                new String[]{ID}, null, null, null);
+        cursor.moveToFirst();
+        Appointment appointment = parseAppointment(cursor);
+        cursor.close();
+        return appointment;
     }
 
     public Customer getCustomerByContractNumber(String ContractNumber) {
@@ -189,5 +220,14 @@ public class DBHelper {
         employee.setPhone(cursor.getInt(cursor.getColumnIndex(DBUtils.EMPLOYEE_PHONE)));
         employee.setEmployeeImage(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_IMAGE)));
         return employee;
+    }
+
+    private Appointment parseAppointment(Cursor cursor) {
+        Appointment appointment = new Appointment();
+        appointment.setAptID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_ID)));
+        appointment.setDate(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_DATE)));
+        appointment.setTimeSlotID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_TIMESLOTID)));
+        appointment.setCustomerID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_CUSTOMERID)));
+        return appointment;
     }
 }
