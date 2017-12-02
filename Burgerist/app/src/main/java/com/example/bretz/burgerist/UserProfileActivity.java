@@ -24,17 +24,6 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserPhone = (TextView)findViewById(R.id.txtUserPhone);
         txtUserEmail = (TextView)findViewById(R.id.txtUserEmail);
         db = new DBHelper(this);
-        contract = getIntent().getStringExtra("Contract");
-        email = getIntent().getStringExtra("Email");
-        sessionCustomer = new Customer();
-
-        sessionCustomer = db.getCustomerByContractNumber(contract);
-
-        txtUserName.setText(sessionCustomer.getName() + " " + sessionCustomer.getLastName());
-        txtUserContract.setText(sessionCustomer.getContractNumber());
-        txtUserPhone.setText(sessionCustomer.getPhone());
-        txtUserEmail.setText(sessionCustomer.getEmail());
-
 
     }
 
