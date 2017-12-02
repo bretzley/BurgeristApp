@@ -1,5 +1,6 @@
 package com.example.bretz.burgerist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -24,6 +25,16 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserPhone = (TextView)findViewById(R.id.txtUserPhone);
         txtUserEmail = (TextView)findViewById(R.id.txtUserEmail);
         db = new DBHelper(this);
+
+        Intent intent = getIntent();
+        Customer customer = intent.getParcelableExtra("data");
+
+        txtUserName.setText(customer.getName());
+        txtUserContract.setText(customer.getContractNumber()+"");
+        txtUserPhone.setText(customer.getPhone()+"");
+        txtUserEmail.setText(customer.getEmail());
+//
+
 
     }
 

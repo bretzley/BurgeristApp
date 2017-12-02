@@ -1,29 +1,13 @@
 package com.example.bretz.burgerist;
 
-import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.bretz.burgerist.Utils.DBHelper;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import static android.widget.Toast.LENGTH_SHORT;
-import static android.widget.Toast.makeText;
 
 public class RequestAppointmentActivity extends AppCompatActivity {
     EditText edtApptSelected, edtApptNotes;
@@ -37,7 +21,7 @@ public class RequestAppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_appointment);
 
-        edtApptSelected = (EditText)findViewById(R.id.edtApptSelected);
+        /*edtApptSelected = (EditText)findViewById(R.id.edtApptSelected);
         edtApptNotes = (EditText)findViewById(R.id.edtApptNotes);
         btnBookAppt = (Button)findViewById(R.id.btnBookAppt);
         datePicker = (DatePicker)findViewById(R.id.datePicker);
@@ -50,6 +34,8 @@ public class RequestAppointmentActivity extends AppCompatActivity {
         final RequestQueue queue = Volley.newRequestQueue(this);
         final String appoitmentAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/appointment";
         final Context myContext = this;
+        Intent intent = getIntent();
+        final Customer customer = intent.getParcelableExtra("data");
 
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
@@ -76,11 +62,11 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                                 public void onResponse(JSONArray response) {
                                     if (response.length() > 0) {
                                         try {
-                                            JSONObject rAppointment = response.(0);
+                                            JSONObject rAppointment = response.getJSONObject(0);
                                             String id = rAppointment.getString("id");
 
                                             db.open();
-                                            db.addAppointment(id, date, timeSlot, customerId);
+                                            db.addAppointment(id, date, timeSlot, customer.getId());
                                             db.close();
                                             Intent intent = new Intent(getApplicationContext(), AppointmentDetailsActivity.class);
                                             startActivity(intent);
@@ -102,7 +88,7 @@ public class RequestAppointmentActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
     }
 

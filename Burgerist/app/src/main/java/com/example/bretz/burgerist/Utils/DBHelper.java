@@ -112,7 +112,7 @@ public class DBHelper {
         return appointment;
     }
 
-    public Customer getCustomerByContractNumber(String ContractNumber) {
+    public Customer getCustomerByContractNumber(int ContractNumber) {
         Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE, CUSTOMER_TABLE_COLUMNS,
                 DBUtils.CUSTOMER_CONTRACT + " = " + ContractNumber, null, null, null, null);
         cursor.moveToFirst();
