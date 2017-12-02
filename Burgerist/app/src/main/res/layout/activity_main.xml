@@ -9,90 +9,91 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
-    <Button
-        android:id="@+id/btnMainLogin"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/btnRegister"
-        android:layout_alignStart="@+id/btnRegister"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="INICIA SESIÓN"
-        android:textColor="@android:color/background_light"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="387dp" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/btnRegGlobal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="REGÍSTRATE"
-        android:textColor="@android:color/background_light"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="445dp" />
-
-    <ImageView
-        android:id="@+id/ivWater"
-        android:layout_width="256dp"
-        android:layout_height="230dp"
-        app:srcCompat="?android:attr/textSelectHandle"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:id="@+id/ivAndroidBot"
-        android:layout_width="185dp"
-        android:layout_height="180dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="82dp"
-        android:layout_alignStart="@+id/ivWater"
-        android:layout_marginBottom="36dp" />
-
-    <RadioGroup
-        android:id="@+id/rgLogin"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnMainLogin"
-        android:layout_below="@+id/ivWater"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rbTec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/rbUser"
-            android:layout_alignStart="@+id/rbUser"
-            android:text="Quiero Ingresar Como Técnico"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="306dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rbUser"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/ivWater"
+                android:layout_width="256dp"
+                android:layout_height="230dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="?android:attr/textSelectHandle"
+                tools:layout_editor_absoluteX="77dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <ImageView
+                android:id="@+id/ivAndroidBot"
+                android:layout_width="185dp"
+                android:layout_height="180dp"
+                android:layout_alignStart="@+id/ivWater"
+                android:layout_marginBottom="36dp"
+                app:srcCompat="@mipmap/ic_launcher"
+                tools:layout_editor_absoluteX="77dp"
+                tools:layout_editor_absoluteY="82dp" />
+        </RelativeLayout>
+
+        <RadioGroup
+            android:id="@+id/rgLogin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnMainLogin"
+            android:layout_below="@+id/ivWater"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="17dp"
-            android:text="Quiero Ingresar Como Usuario"
-            tools:layout_editor_absoluteX="83dp"
-            tools:layout_editor_absoluteY="343dp" />
-    </RadioGroup>
+            android:baselineAligned="false"
+            android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/btnRegGlobal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnRegister"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btnRegister"
-        android:layout_marginBottom="14dp"
-        android:text="Registro manual" />
+            <RadioButton
+                android:id="@+id/rbTec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/rbUser"
+                android:layout_alignStart="@+id/rbUser"
+                android:text="Quiero Ingresar Como Técnico"
+                tools:layout_editor_absoluteX="82dp"
+                tools:layout_editor_absoluteY="306dp" />
+
+            <RadioButton
+                android:id="@+id/rbUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnMainLogin"
+                android:layout_centerHorizontal="true"
+                android:text="Quiero Ingresar Como Usuario"
+                tools:layout_editor_absoluteX="83dp"
+                tools:layout_editor_absoluteY="343dp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_above="@+id/btnRegGlobal"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorAccent"
+            android:text="REGÍSTRATE"
+            android:textColor="@android:color/background_light"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="445dp" />
+
+        <Button
+            android:id="@+id/btnMainLogin"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_above="@+id/btnRegister"
+            android:layout_alignStart="@+id/btnRegister"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="INICIA SESIÓN"
+            android:textColor="@android:color/background_light"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="387dp" />
+    </LinearLayout>
 
 
 </RelativeLayout>

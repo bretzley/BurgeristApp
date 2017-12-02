@@ -63,12 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edtUserContract.getText() == null) {
-                    makeText(getApplicationContext(), "Por favor, escribe un numero de contrato.", LENGTH_SHORT).show();
+                    makeText(myContext, "Por favor, escribe un numero de contrato.", LENGTH_SHORT).show();
                 } else {
-                    /*db.open();
-                    db.addCustomer("a", 1, "a", "a", "a", "a", "a", 1, "a", true);
-                    db.close();*/
-
                     final String contractNumber = edtUserContract.getText().toString();
                     final String cByContractNo = "?ContractNumber=";
                     final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
@@ -98,20 +94,20 @@ public class RegisterActivity extends AppCompatActivity {
                                                 edtUserEmail.setEnabled(true);
                                                 edtUserPass.setEnabled(true);
                                             } else {
-                                                makeText(getApplicationContext(), name + ", ya esta registrado. Por favor, inice sesion.", LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), UserLoginActivity.class);
+                                                makeText(myContext, name + ", ya esta registrado. Por favor, inice sesion.", LENGTH_SHORT).show();
+                                                Intent intent = new Intent(myContext, UserLoginActivity.class);
                                                 startActivity(intent);
                                             }
                                         } catch (JSONException e) {
-                                            makeText(myContext, "El numero de contrato no existe.", LENGTH_SHORT).show();
+                                            makeText(myContext, "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
                                         }
                                     } else
-                                        makeText(getApplicationContext(), "El numero de contrato no existe. No response", LENGTH_SHORT).show();
+                                        makeText(myContext, "El numero de contrato no existe. No response", LENGTH_SHORT).show();
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    makeText(getApplicationContext(), "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT).show();
+                                    makeText(myContext, "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT).show();
                                 }
                             });
 
@@ -124,11 +120,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edtUserEmail.getText() == null) {
-                    makeText(getApplicationContext(), "Por favor, escribe un correo.", LENGTH_SHORT).show();
+                    makeText(myContext, "Por favor, escribe un correo.", LENGTH_SHORT).show();
                 } else if (edtUserPass.getText() == null) {
-                    makeText(getApplicationContext(), "Por favor, escribe una contraseña.", LENGTH_SHORT).show();
+                    makeText(myContext, "Por favor, escribe una contraseña.", LENGTH_SHORT).show();
                 } else {
-                    final String contractNumber = edtUserContract.getText().toString();
+                    final int contractNumber = Integer.parseInt(edtUserContract.getText().toString());
                     db.open();
                     final Customer customer = db.getCustomerByContractNumber(contractNumber);
                     db.close();
@@ -143,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                         customerJSONObject.put("Registered", true);
                         customerJSONObject.put("id", customer.getId());
                     } catch (Exception e) {
-                        makeText(getApplicationContext(), "Oops, algo salio mal. Intenta en un momento.", LENGTH_SHORT);
+                        makeText(myContext, "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT);
                     }
 
                     final JsonObjectRequest jsonUpdateCustomerRequest = new JsonObjectRequest
@@ -152,17 +148,17 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onResponse(JSONObject response) {
 
                                     try {
-                                        makeText(getApplicationContext(), "Bienvenido, " + response.getString("Name") + "!", LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), UserLoginActivity.class);
+                                        makeText(myContext, "Bienvenido, " + response.getString("Name") + "!", LENGTH_SHORT).show();
+                                        Intent intent = new Intent(myContext, UserLoginActivity.class);
                                         startActivity(intent);
                                     } catch (JSONException e) {
-                                        makeText(getApplicationContext(), "Algo salio mal, intenta de nuevo. :(", LENGTH_SHORT);
+                                        makeText(myContext, "Algo salio mal, intenta de nuevo. :(", LENGTH_SHORT);
                                     }
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    makeText(getApplicationContext(), "El registro no pudo ser completado, intente en un momento.", LENGTH_SHORT).show();
+                                    makeText(myContext, "El registro no pudo ser completado, intente en un momento.", LENGTH_SHORT).show();
                                 }
                             });
 

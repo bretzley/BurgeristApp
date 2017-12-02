@@ -33,31 +33,12 @@ public class MainActivity extends AppCompatActivity {
         rbUser.setOnCheckedChangeListener(radioListener);
         rbTec.setOnCheckedChangeListener(radioListener);
 
-
-
-
+        rbUser.setChecked(true);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLogin= new Intent(getApplicationContext(), UserLoginActivity.class);
-
-                /*switch (v.getId()){
-                    case R.id.rbTec:
-                        if(checked){
-                            txtLogin.setText("¡Bienvenido Tecnico!");
-                        }
-                        break;
-                    case R.id.rbUser:
-                        if(checked) {
-                            txtLogin.setText("¡Bienvenido Cliente Distinguido!");
-                        }
-                        break;
-                    default:
-                        Toast.makeText(getApplicationContext(),"Error! Seleccione el tipo de usuario para iniciar sesion.",Toast.LENGTH_LONG);
-                        break;
-
-                }*/
                 startActivity(intentLogin);
             }
         });
@@ -80,20 +61,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    final CompoundButton.OnCheckedChangeListener radioListener =
-            new CompoundButton.OnCheckedChangeListener()
-            {
+    final CompoundButton.OnCheckedChangeListener radioListener = new CompoundButton.OnCheckedChangeListener(){
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                 {
                     if (!isChecked)
                         return;
-                    if (buttonView.getId() == R.id.rbUser)
-                        Toast.makeText(getApplicationContext(), "Seleccionaste ingresar como usuario", Toast.LENGTH_SHORT).show();
+                    if (buttonView.getId() == R.id.rbUser) {
+                        btnRegister.setEnabled(true);
+                    }
                     else if (buttonView.getId() == R.id.rbTec)
-                        Toast.makeText(getApplicationContext(), "Seleccionaste ingresar como tecnico", Toast.LENGTH_SHORT).show();
+                        btnRegister.setEnabled(false);
                 }
             };
 }
