@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister, btnRegGlobal;
+    Button btnLogin, btnRegister;
     RadioButton rbTec, rbUser;
     RadioGroup rgLogin;
     TextView txtLogin;
@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btnMainLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnRegGlobal = (Button)findViewById(R.id.btnRegGlobal);
         rbUser = (RadioButton) findViewById(R.id.rbUser);
         rbTec = (RadioButton) findViewById(R.id.rbTec);
         rgLogin = (RadioGroup) findViewById(R.id.rgLogin);
@@ -39,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentLogin= new Intent(getApplicationContext(), UserLoginActivity.class);
+                if (rbUser.isChecked())
+                    intentLogin.putExtra("user", "customer");
+                else
+                    intentLogin.putExtra("user", "employee");
                 startActivity(intentLogin);
             }
         });
@@ -52,13 +55,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnRegGlobal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RegisterAllActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     final CompoundButton.OnCheckedChangeListener radioListener = new CompoundButton.OnCheckedChangeListener(){
