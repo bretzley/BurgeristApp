@@ -13,10 +13,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister;
+    Button btnLogin;
+            //, btnRegister;
     RadioButton rbTec, rbUser;
     RadioGroup rgLogin;
-    TextView txtLogin;
+    TextView txtRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnLogin = (Button) findViewById(R.id.btnMainLogin);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        //btnRegister = (Button) findViewById(R.id.btnRegister);
         rbUser = (RadioButton) findViewById(R.id.rbUser);
         rbTec = (RadioButton) findViewById(R.id.rbTec);
         rgLogin = (RadioGroup) findViewById(R.id.rgLogin);
-        txtLogin = (TextView) findViewById(R.id.txtWelcomeLogin);
+        txtRegister = (TextView) findViewById(R.id.txtRegisterUsr);
         rbUser.setOnCheckedChangeListener(radioListener);
         rbTec.setOnCheckedChangeListener(radioListener);
 
@@ -47,13 +48,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        txtRegister.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
 
     }
 
@@ -61,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                 {
-                    if (!isChecked)
+                    if (!isChecked) {
                         return;
-                    if (buttonView.getId() == R.id.rbUser) {
-                        btnRegister.setEnabled(true);
+                        /*if (buttonView.getId() == R.id.rbUser) {
+
+                        } else if (buttonView.getId() == R.id.rbTec) {
+
+                        }else{}*/
                     }
-                    else if (buttonView.getId() == R.id.rbTec)
-                        btnRegister.setEnabled(false);
                 }
             };
 }
