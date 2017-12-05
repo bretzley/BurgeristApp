@@ -15,11 +15,12 @@ import com.example.bretz.burgerist.R;
 
 public class CustomerAdapter extends ArrayAdapter<Customer>{
     public CustomerAdapter(Context context) {
-        super(context,  R.layout.profile_rows, R.id.txtProfile);
+        super(context,  R.layout.appointment_layout, R.id.txtFolio);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View oView = super.getView(position, convertView, parent);
+
         TextView txtName = (TextView) oView.findViewById(R.id.txtUserName);
         TextView txtContract = (TextView) oView.findViewById(R.id.txtUserContract);
         TextView txtPhone = (TextView) oView.findViewById(R.id.txtUserPhone);

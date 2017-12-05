@@ -10,6 +10,8 @@ import com.example.bretz.burgerist.Objects.Appointment;
 import com.example.bretz.burgerist.Objects.Customer;
 import com.example.bretz.burgerist.Objects.Employee;
 
+import java.util.Date;
+
 /**
  * Created by bretz on 11/17/2017.
  */
@@ -50,7 +52,8 @@ public class DBHelper {
                     DBUtils.APPOINTMENT_ID,
                     DBUtils.APPOINTMENT_DATE,
                     DBUtils.APPOINTMENT_TIMESLOTID,
-                    DBUtils.APPOINTMENT_CUSTOMERID
+                    DBUtils.APPOINTMENT_CUSTOMERID,
+                    DBUtils.APPOINTMENT_EMPLOYEEID
 
             };
 
@@ -112,20 +115,33 @@ public class DBHelper {
         return appointment;
     }
 
-    public Customer getCustomerByContractNumber(int ContractNumber) {
-        Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE, CUSTOMER_TABLE_COLUMNS,
-                DBUtils.CUSTOMER_CONTRACT + " = " + ContractNumber, null, null, null, null);
+    public Customer getCustomerByContractNumber(String ContractNumber) {
+        Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE,
+                CUSTOMER_TABLE_COLUMNS,
+                DBUtils.CUSTOMER_CONTRACT + " =?",
+                new String[] {ContractNumber}, null, null, null);
         cursor.moveToFirst();
         Customer customer = parseCustomer(cursor);
         cursor.close();
         return customer;
     }
 
-    public boolean customerExistsByContractNumber(String contractNumber) {
+    public Customer getCustomerByID(String id) {
+        Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE,
+                CUSTOMER_TABLE_COLUMNS,
+                DBUtils.CUSTOMER_ID + " =?",
+                new String[] {id}, null, null, null);
+        cursor.moveToFirst();
+        Customer customer = parseCustomer(cursor);
+        cursor.close();
+        return customer;
+    }
+
+    public boolean customerExistsByContractNumber(String ContractNumber) {
         Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE,
                 CUSTOMER_TABLE_COLUMNS,
                 DBUtils.CUSTOMER_CONTRACT + " =?",
-                new String[] {contractNumber}, null, null, null);
+                new String[] {ContractNumber}, null, null, null);
         int x = cursor.getCount();
         cursor.close();
         return x > 0;
@@ -194,6 +210,17 @@ public class DBHelper {
         return employee;
     }
 
+    public Employee getEmployeeByID(String id) {
+        Cursor cursor = database.query(DBUtils.EMPLOYEE_TABLE,
+                EMPLOYEE_TABLE_COLUMNS,
+                DBUtils.EMPLOYEE_ID + " =?",
+                new String[] {id}, null, null, null);
+        cursor.moveToFirst();
+        Employee employee = parseEmployee(cursor);
+        cursor.close();
+        return employee;
+    }
+
     private Customer parseCustomer(Cursor cursor) {
         Customer customer = new Customer();
         customer.setId(cursor.getString(cursor.getColumnIndex(DBUtils.CUSTOMER_ID)));
@@ -213,7 +240,7 @@ public class DBHelper {
         Employee employee = new Employee();
         employee.setId(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_ID)));
         employee.setEmployeeCode(cursor.getInt(cursor.getColumnIndex(DBUtils.EMPLOYEE_CODE)));
-        employee.setFirstName(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_NAME)));
+        employee.setName(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_NAME)));
         employee.setLastName(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_LASTNAME)));
         employee.setEmail(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_EMAIL)));
         employee.setPassword(cursor.getString(cursor.getColumnIndex(DBUtils.EMPLOYEE_PASSWORD)));
@@ -224,10 +251,11 @@ public class DBHelper {
 
     private Appointment parseAppointment(Cursor cursor) {
         Appointment appointment = new Appointment();
-        appointment.setAptID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_ID)));
+        appointment.setId(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_ID)));
         appointment.setDate(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_DATE)));
-        appointment.setTimeSlotID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_TIMESLOTID)));
-        appointment.setCustomerID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_CUSTOMERID)));
+        appointment.setTimeSlot(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_TIMESLOTID)));
+        appointment.setCustomer(getCustomerByID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_CUSTOMERID))));
+        appointment.setEmployee(getEmployeeByID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_EMPLOYEEID))));
         return appointment;
     }
 }

@@ -3,64 +3,71 @@ package com.example.bretz.burgerist.Objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 /**
  * Created by bretz on 11/24/2017.
  */
 
 public class Appointment implements Parcelable{
-    private String AptID;
+
+    //Properties
+    private String id;
     private String date;
-    private String timeSlotID;
-    private String customerID;
+    private String timeSlot;
+    private Customer customer;
+    private Employee employee;
 
-
-    public Appointment(Parcel in) {
-        this.AptID = in.readString();
-        this.date = in.readString();
-        this.timeSlotID = in.readString();
-        this.customerID = in.readString();
-    }
-
+    //Constructors
     public Appointment(){}
 
-    public Appointment(String AptId, String date, String timeSlotID, String customerID){
-        this.AptID = AptId;
+    public Appointment(String id, String date, String timeSlot, Customer customer, Employee employee){
+        this.id = id;
         this.date = date;
-        this.timeSlotID = timeSlotID;
-        this.customerID = customerID;
+        this.timeSlot = timeSlot;
+        this.customer = customer;
+        this.employee = employee;
     }
-    public void setAptID(String aptID) {
-        AptID = aptID;
+
+    //Setters
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setDate(String date) {
         this.date = date;
     }
 
-    public void setTimeSlotID(String timeSlotID) {
-        this.timeSlotID = timeSlotID;
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getAptID() {
-        return AptID;
+    public void setEmployee(Employee employee) { this.employee = employee; }
+
+    //Getters
+    public String getId() {
+        return id;
     }
 
     public String getDate() {
         return date;
     }
 
-    public String getTimeSlotID() {
-        return timeSlotID;
+    public String getTimeSlot() {
+        return timeSlot;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public Customer getCustomer() {
+        return customer;
     }
 
+    public Employee getEmployee() { return  employee; }
+
+    //Parcelable
     @Override
     public int describeContents() {
         return 0;
@@ -68,11 +75,19 @@ public class Appointment implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(AptID);
+        dest.writeString(id);
         dest.writeString(date);
-        dest.writeString(timeSlotID);
-        dest.writeString(customerID);
-       ;
+        dest.writeString(timeSlot);
+        dest.writeParcelable(customer, flags);
+        dest.writeParcelable(employee, flags);
+    }
+
+    protected Appointment(Parcel in) {
+        this.id = in.readString();
+        this.date = in.readString();
+        this.timeSlot = in.readString();
+        this.customer = in.readParcelable(getClass().getClassLoader());
+        this.employee = in.readParcelable(getClass().getClassLoader());
     }
 
     public static final Parcelable.Creator<Appointment> CREATOR = new Parcelable.Creator<Appointment>() {

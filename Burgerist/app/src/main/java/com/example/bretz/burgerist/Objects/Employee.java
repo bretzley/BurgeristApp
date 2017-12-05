@@ -3,11 +3,15 @@ package com.example.bretz.burgerist.Objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by bretz on 11/17/2017.
  */
 
 public class Employee implements Parcelable{
+    //Properties
     private String Id;
     private int EmployeeCode;
     private String Name;
@@ -18,19 +22,7 @@ public class Employee implements Parcelable{
     private String EmployeeImage;
     private Boolean Registered;
 
-
-    public Employee(Parcel in) {
-        this.Id = in.readString();
-        this.EmployeeCode = in.readInt();
-        this.Name = in.readString();
-        this.LastName = in.readString();
-        this.Email = in.readString();
-        this.Password = in.readString();
-        this.Phone = in.readInt();
-        this.EmployeeImage = in.readString();
-        this.Registered = in.readByte() != 0;
-    }
-
+    //Constructors
     public Employee(){}
 
     public Employee(String Id, int EmployeeCode, String Name, String LastName, String Email, String Password, int Phone, String EmployeeImage, Boolean Registered){
@@ -45,6 +37,24 @@ public class Employee implements Parcelable{
         this.Registered = Registered;
     }
 
+    public Employee(JSONObject jCustomer){
+        try{
+            this.Id = jCustomer.getString("id");
+            this.EmployeeCode = jCustomer.getInt("EmployeeNumber");
+            this.Name = jCustomer.getString("Name");
+            this.LastName = jCustomer.getString("LastName");;
+            this.Email = jCustomer.getString("Email");;
+            this.Password = jCustomer.getString("Password");;
+            this.Phone = jCustomer.getInt("Phone");;
+            this.EmployeeImage = jCustomer.getString("Image");;
+            this.Registered = jCustomer.getBoolean("Registered");;
+        }
+        catch(JSONException e){
+
+        }
+    }
+
+    //Getters
     public String getId() {
         return Id;
     }
@@ -81,6 +91,7 @@ public class Employee implements Parcelable{
         return Registered;
     }
 
+    //Setters
     public void setId(String id) {
         Id = id;
     }
@@ -89,7 +100,7 @@ public class Employee implements Parcelable{
         EmployeeCode = employeeCode;
     }
 
-    public void setFirstName(String name) {
+    public void setName(String name) {
         Name = name;
     }
 
@@ -117,6 +128,7 @@ public class Employee implements Parcelable{
         Registered = registered;
     }
 
+    //Parcelable
     @Override
     public int describeContents() {
         return 0;
@@ -133,6 +145,18 @@ public class Employee implements Parcelable{
         dest.writeInt(Phone);
         dest.writeString(EmployeeImage);
         dest.writeByte((byte) (Registered ? 1 : 0));
+    }
+
+    public Employee(Parcel in) {
+        this.Id = in.readString();
+        this.EmployeeCode = in.readInt();
+        this.Name = in.readString();
+        this.LastName = in.readString();
+        this.Email = in.readString();
+        this.Password = in.readString();
+        this.Phone = in.readInt();
+        this.EmployeeImage = in.readString();
+        this.Registered = in.readByte() != 0;
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {

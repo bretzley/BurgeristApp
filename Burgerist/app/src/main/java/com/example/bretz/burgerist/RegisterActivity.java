@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (edtUserPass.getText() == null) {
                     makeText(myContext, "Por favor, escribe una contraseña.", LENGTH_SHORT).show();
                 } else {
-                    final int contractNumber = Integer.parseInt(edtUserContract.getText().toString());
+                    String contractNumber = edtUserContract.getText().toString();
                     db.open();
                     final Customer customer = db.getCustomerByContractNumber(contractNumber);
                     db.close();

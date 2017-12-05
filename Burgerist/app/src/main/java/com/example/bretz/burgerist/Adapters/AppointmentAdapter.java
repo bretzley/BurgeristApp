@@ -15,18 +15,25 @@ import com.example.bretz.burgerist.R;
 
 public class AppointmentAdapter extends ArrayAdapter<Appointment> {
     public AppointmentAdapter(Context context) {
-        super(context, R.layout.profile_rows, R.id.txtTitleAppt);
+        super(context, R.layout.appointment_layout, R.id.txtFolio);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View oView = super.getView(position, convertView, parent);
-        TextView txtApptId = (TextView) oView.findViewById(R.id.txtApptId);
-        TextView txtDateAppt = (TextView) oView.findViewById(R.id.txtDateAppt);
+
+        TextView txtFolio = (TextView) oView.findViewById(R.id.txtFolio);
+        TextView txtCustomer = (TextView) oView.findViewById(R.id.txtCustomer);
+        TextView txtDate = (TextView) oView.findViewById(R.id.txtDate);
+        TextView txtTimeFrame = (TextView) oView.findViewById(R.id.txtTimeFrame);
 
 
-        final Appointment appointment = this.getItem(position);
-        txtApptId.setText(appointment.getAptID().toString()+"");
-        txtDateAppt.setText(appointment.getDate().toString() + "");
+        Appointment oAppointment = this.getItem(position);
+
+        txtFolio.setText("Folio: " + oAppointment.getId());
+        txtCustomer.setText("Cliente: " + oAppointment.getCustomer().getName());
+        txtDate.setText("Fecha: " + oAppointment.getDate().toString());
+        txtTimeFrame.setText("Horario: " + oAppointment.getTimeSlot());
+
         return oView;
     }
 }

@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBUtils extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Burgerista.db";
-    public static final int DATABASE_VERSION = 13;
+    public static final int DATABASE_VERSION = 14;
 
     //-----------------CUSTOMER TABLE---------------------------
     public static final String CUSTOMER_TABLE = "Customer";
@@ -44,6 +44,7 @@ public class DBUtils extends SQLiteOpenHelper {
     public static final String APPOINTMENT_DATE = "Date";
     public static final String APPOINTMENT_TIMESLOTID = "TimeSlotID";
     public static final String APPOINTMENT_CUSTOMERID = "CustomerID";
+    public static final String APPOINTMENT_EMPLOYEEID = "EmployeeID";
 
     //-----------------APPOINTMENT DETAILS TABLE---------------------------
     public static final String APPTDET_TABLE = "AppointmentDetail";
@@ -53,7 +54,6 @@ public class DBUtils extends SQLiteOpenHelper {
     public static final String APPTDET_END = "EndTime";
     public static final String APPTDETE_TECHNOTES = "TechNotes";
     public static final String APPTDET_CUSTOMERNOTES = "CustomerNotes";
-    public static final String APPTDET_EMPLOYEEID = "EmployeeID";
     public static final String APPTDET_RATING = "Rating";
 
     //-----------------TIME SLOT TABLE---------------------------
@@ -90,9 +90,10 @@ public class DBUtils extends SQLiteOpenHelper {
     public static final String CREATE_APPOINTMENT =
             "CREATE TABLE " + APPOINTMENT_TABLE + "(" +
                     APPOINTMENT_ID + " TEXT, " +
-                    APPOINTMENT_DATE + " DATETIME, " +
+                    APPOINTMENT_DATE + " TEXT, " +
                     APPOINTMENT_TIMESLOTID + " TEXT, " +
-                    APPOINTMENT_CUSTOMERID + " TEXT)";
+                    APPOINTMENT_CUSTOMERID + " TEXT, " +
+                    APPOINTMENT_EMPLOYEEID + " TEXT)";
 
     public static final String CREATE_APPTDET =
             "CREATE TABLE " + APPTDET_TABLE + "(" +
@@ -102,7 +103,6 @@ public class DBUtils extends SQLiteOpenHelper {
                     APPTDET_END + " TEXT, " +
                     APPTDETE_TECHNOTES + " TEXT, " +
                     APPTDET_CUSTOMERNOTES + " TEXT, " +
-                    APPTDET_EMPLOYEEID + " TEXT, " +
                     APPTDET_RATING + " INTEGER)";
 
     public static final String CREATE_TIMESLOT =

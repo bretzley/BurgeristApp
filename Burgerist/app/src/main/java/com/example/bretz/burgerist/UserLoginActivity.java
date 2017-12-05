@@ -86,10 +86,11 @@ public class UserLoginActivity extends AppCompatActivity {
                                                     String address = rCustomer.getString("Address");
                                                     Customer c = new Customer(id, number, name, lastName, email, password, address, phone, image, registered);
                                                     intent.putExtra("data", c);
-                                                }else {
+                                                }else{
                                                     Employee e = new Employee(id, number, name, lastName, email, password, phone, image, registered);
                                                     intent.putExtra("data", e);
                                                 }
+                                                intent.putExtra("user", user);
                                                 startActivity(intent);
                                             } else
                                                 makeText(myContext, "Numero o contraseña incorrectos.", LENGTH_SHORT).show();
