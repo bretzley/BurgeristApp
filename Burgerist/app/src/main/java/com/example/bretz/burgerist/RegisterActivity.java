@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextView txtLogin;
     EditText edtUserContract, edtUserEmail, edtUserPass;
-    Button btnRegisterUser, btnLookForContractNo;
+    Button btnRegisterUser;
     DBHelper db;
     ArrayList<Customer> customers;
 
@@ -48,31 +48,34 @@ public class RegisterActivity extends AppCompatActivity {
         edtUserContract = (EditText) findViewById(R.id.edtUserContract);
         edtUserEmail = (EditText) findViewById(R.id.edtUserEmail);
         edtUserPass = (EditText) findViewById(R.id.edtUserPass);
-        btnRegisterUser = (Button) findViewById(R.id.btRegisterUser);
-        btnLookForContractNo = (Button) findViewById(R.id.btnLookForContractNo);
+        btnRegisterUser = (Button) findViewById(R.id.btnRegisterUser);
         txtLogin = (TextView) findViewById(R.id.txtLogin);
 
         db = new DBHelper(this);
         customers = new ArrayList<>();
 
-        edtUserEmail.setEnabled(false);
-        edtUserPass.setEnabled(false);
-        btnRegisterUser.setVisibility(View.INVISIBLE);
+        edtUserEmail.setEnabled(true);
+        edtUserPass.setEnabled(true);
+        btnRegisterUser.setVisibility(View.VISIBLE);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
         final String customerAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/customer";
         final Context myContext = this;
 
-        btnLookForContractNo.setOnClickListener(new View.OnClickListener() {
+        btnRegisterUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtUserContract.getText() == null) {
-                    makeText(myContext, "Por favor, escribe un numero de contrato.", LENGTH_SHORT).show();
+                if (edtUserContract.getText().toString().equals("")) {
+                    makeText(getApplicationContext(), "Por favor, escriba su número de contrato.", LENGTH_SHORT).show();
+                } else if (edtUserEmail.getText().toString().equals("")) {
+                    makeText(getApplicationContext(), "Por favor, escriba su correo.", LENGTH_SHORT).show();
+                } else if (edtUserPass.getText().toString().equals("")) {
+                    makeText(getApplicationContext(), "Por favor, escriba su contraseña.", LENGTH_SHORT).show();
                 } else {
-                    final String contractNumber = edtUserContract.getText().toString();
-                    final String cByContractNo = "?ContractNumber=";
+                    final String inContractNumber = edtUserContract.getText().toString();
+                    final String url = customerAPI + "?ContractNumber=" + inContractNumber;
                     final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
-                            (Request.Method.GET, customerAPI + cByContractNo + contractNumber, null, new Response.Listener<JSONArray>() {
+                            (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     if (response.length() > 0) {
@@ -82,87 +85,53 @@ public class RegisterActivity extends AppCompatActivity {
                                             String name = rCustomer.getString("Name");
                                             if (!registered) {
                                                 String id = rCustomer.getString("id");
-                                                int contractNo = Integer.parseInt(contractNumber);
-                                                String lastName = rCustomer.getString("LastName");
-                                                String email = rCustomer.has("Email") ? rCustomer.getString("Email") : "";
-                                                String password = rCustomer.has("Password") ? rCustomer.getString("Password") : "";
-                                                String address = rCustomer.getString("Address");
-                                                int phone = rCustomer.getInt("Phone");
-                                                String image = rCustomer.has("Image") ? rCustomer.getString("Image") : "";
-                                                db.open();
-                                                db.addCustomer(id, contractNo, name, lastName, email, password, address, phone, image, registered);
-                                                db.close();
-                                                btnRegisterUser.setVisibility(View.VISIBLE);
-                                                btnLookForContractNo.setVisibility(View.INVISIBLE);
-                                                edtUserContract.setEnabled(false);
-                                                edtUserEmail.setEnabled(true);
-                                                edtUserPass.setEnabled(true);
+
+                                                String inEmail = edtUserEmail.getText().toString();
+                                                String inPassword = edtUserPass.getText().toString();
+
+                                                JSONObject customerJSONObject = new JSONObject();
+                                                customerJSONObject.put("Email", inEmail);
+                                                customerJSONObject.put("Password", inPassword);
+                                                customerJSONObject.put("Registered", true);
+                                                customerJSONObject.put("id", id);
+
+                                                final JsonObjectRequest jsonUpdateCustomerRequest = new JsonObjectRequest
+                                                        (Request.Method.PUT, customerAPI, customerJSONObject, new Response.Listener<JSONObject>() {
+                                                            @Override
+                                                            public void onResponse(JSONObject response) {
+                                                                try {
+                                                                    makeText(getApplicationContext(), "Bienvenido, " + response.getString("Name") + "!", LENGTH_SHORT).show();
+                                                                    startLoginActivity();
+                                                                } catch (JSONException e) {
+                                                                    makeText(getApplicationContext(), "Algo salió mal, intenta de nuevo. :(", LENGTH_SHORT);
+                                                                }
+                                                            }
+                                                        }, new Response.ErrorListener() {
+                                                            @Override
+                                                            public void onErrorResponse(VolleyError error) {
+                                                                makeText(getApplicationContext(), "Problemas de conexión, intente en un momento. PUT", LENGTH_SHORT).show();
+                                                            }
+                                                        });
+
+                                                queue.add(jsonUpdateCustomerRequest);
+
                                             } else {
-                                                makeText(myContext, name + ", ya esta registrado. Por favor, inice sesion.", LENGTH_SHORT).show();
+                                                makeText(getApplicationContext(), name + ", ya está registrado. Por favor, inice sesión.", LENGTH_SHORT).show();
                                             }
                                         } catch (JSONException e) {
-                                            makeText(myContext, "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
+                                            makeText(getApplicationContext(), "Algo salió mal, intente de nuevo.", LENGTH_SHORT).show();
                                         }
                                     } else
-                                        makeText(myContext, "El numero de contrato no existe. No response", LENGTH_SHORT).show();
+                                        makeText(getApplicationContext(), "El número de contrato no existe.", LENGTH_SHORT).show();
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    makeText(myContext, "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT).show();
+                                    makeText(getApplicationContext(), "Problemas de conexión, intente en un momento." + error.toString(), LENGTH_LONG).show();
                                 }
                             });
 
                     queue.add(jsonGetCustomerRequest);
-                }
-            }
-        });
-
-        btnRegisterUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edtUserEmail.getText() == null) {
-                    makeText(myContext, "Por favor, escribe un correo.", LENGTH_SHORT).show();
-                } else if (edtUserPass.getText() == null) {
-                    makeText(myContext, "Por favor, escribe una contraseña.", LENGTH_SHORT).show();
-                } else {
-                    String contractNumber = edtUserContract.getText().toString();
-                    db.open();
-                    final Customer customer = db.getCustomerByContractNumber(contractNumber);
-                    db.close();
-
-                    final String email = edtUserEmail.getText().toString();
-                    final String password = edtUserPass.getText().toString();
-
-                    final JSONObject customerJSONObject = new JSONObject();
-                    try {
-                        customerJSONObject.put("Email", email);
-                        customerJSONObject.put("Password", password);
-                        customerJSONObject.put("Registered", true);
-                        customerJSONObject.put("id", customer.getId());
-                    } catch (Exception e) {
-                        makeText(myContext, "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT);
-                    }
-
-                    final JsonObjectRequest jsonUpdateCustomerRequest = new JsonObjectRequest
-                            (Request.Method.PUT, customerAPI, customerJSONObject, new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        makeText(myContext, "Bienvenido, " + response.getString("Name") + "!", LENGTH_SHORT).show();
-                                        startLoginActivity();
-                                    } catch (JSONException e) {
-                                        makeText(myContext, "Algo salio mal, intenta de nuevo. :(", LENGTH_SHORT);
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    makeText(myContext, "El registro no pudo ser completado, intente en un momento.", LENGTH_SHORT).show();
-                                }
-                            });
-
-                    queue.add(jsonUpdateCustomerRequest);
                 }
             }
         });
@@ -173,7 +142,6 @@ public class RegisterActivity extends AppCompatActivity {
                 startLoginActivity();
             }
         });
-
     }
 
     private void startLoginActivity() {
