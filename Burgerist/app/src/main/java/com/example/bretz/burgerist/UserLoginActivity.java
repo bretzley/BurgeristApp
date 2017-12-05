@@ -41,8 +41,8 @@ public class UserLoginActivity extends AppCompatActivity {
 
         db = new DBHelper(this);
         btnUserLog = (Button) findViewById(R.id.btnUserLogin);
-        edtPass = (EditText) findViewById(R.id.edtLoginUserPass);
-        edtUser = (EditText) findViewById(R.id.edtLoginUser);
+        edtPass = (EditText) findViewById(R.id.edtPasswordLogin);
+        edtUser = (EditText) findViewById(R.id.edtNumberLogin);
 
         if (user.equals("employee"))
             edtUser.setHint("Numero de Empleado");

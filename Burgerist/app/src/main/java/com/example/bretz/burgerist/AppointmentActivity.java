@@ -1,10 +1,13 @@
 package com.example.bretz.burgerist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -66,6 +69,7 @@ public class AppointmentActivity extends AppCompatActivity {
                                     JSONObject jEmployee = appointment.getJSONObject("EmployeeID");
                                     Employee employee = new Employee(jEmployee);
                                     Appointment apt = new Appointment(id, date, timeSlot, customer, employee);
+                                    appointments.add(apt);
                                     apptAdapter.add(apt);
                                 }
                                 apptAdapter.notifyDataSetChanged();
@@ -82,7 +86,18 @@ public class AppointmentActivity extends AppCompatActivity {
 
         queue.add(jsonGetCustomerRequest);
 
-        //Intent intent = new Intent(getApplicationContext(), AppointmentDetails.class);
+
+
+        lstAppointments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Appointment apt = appointments.get(i);
+                Intent intent = new Intent(getApplicationContext(), AppointmentDetailsActivity.class);
+                intent.putExtra("appointment", apt);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

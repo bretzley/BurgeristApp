@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,6 +34,7 @@ import static android.widget.Toast.*;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    TextView txtLogin;
     EditText edtUserContract, edtUserEmail, edtUserPass;
     Button btnRegisterUser, btnLookForContractNo;
     DBHelper db;
@@ -48,6 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
         edtUserPass = (EditText) findViewById(R.id.edtUserPass);
         btnRegisterUser = (Button) findViewById(R.id.btRegisterUser);
         btnLookForContractNo = (Button) findViewById(R.id.btnLookForContractNo);
+        txtLogin = (TextView) findViewById(R.id.txtLogin);
+
         db = new DBHelper(this);
         customers = new ArrayList<>();
 
@@ -95,8 +99,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                 edtUserPass.setEnabled(true);
                                             } else {
                                                 makeText(myContext, name + ", ya esta registrado. Por favor, inice sesion.", LENGTH_SHORT).show();
-                                                Intent intent = new Intent(myContext, UserLoginActivity.class);
-                                                startActivity(intent);
                                             }
                                         } catch (JSONException e) {
                                             makeText(myContext, "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
@@ -146,11 +148,9 @@ public class RegisterActivity extends AppCompatActivity {
                             (Request.Method.PUT, customerAPI, customerJSONObject, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-
                                     try {
                                         makeText(myContext, "Bienvenido, " + response.getString("Name") + "!", LENGTH_SHORT).show();
-                                        Intent intent = new Intent(myContext, UserLoginActivity.class);
-                                        startActivity(intent);
+                                        startLoginActivity();
                                     } catch (JSONException e) {
                                         makeText(myContext, "Algo salio mal, intenta de nuevo. :(", LENGTH_SHORT);
                                     }
@@ -166,5 +166,19 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startLoginActivity();
+            }
+        });
+
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 }

@@ -17,8 +17,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_height="161dp"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/ivWater"
@@ -41,6 +41,14 @@
                 tools:layout_editor_absoluteY="82dp" />
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:text="Iniciar sesión como" />
+
         <RadioGroup
             android:id="@+id/rgLogin"
             android:layout_width="match_parent"
@@ -48,19 +56,10 @@
             android:layout_above="@+id/btnMainLogin"
             android:layout_below="@+id/ivWater"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
             android:baselineAligned="false"
-            android:gravity="center_horizontal">
-
-            <RadioButton
-                android:id="@+id/rbTec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/rbUser"
-                android:layout_alignStart="@+id/rbUser"
-                android:text="Quiero Ingresar Como Técnico"
-                tools:layout_editor_absoluteX="82dp"
-                tools:layout_editor_absoluteY="306dp" />
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rbUser"
@@ -68,10 +67,78 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/btnMainLogin"
                 android:layout_centerHorizontal="true"
-                android:text="Quiero Ingresar Como Usuario"
+                android:text="Usuario"
                 tools:layout_editor_absoluteX="83dp"
                 tools:layout_editor_absoluteY="343dp" />
+
+            <RadioButton
+                android:id="@+id/rbTec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/rbUser"
+                android:layout_alignStart="@+id/rbUser"
+                android:text="Técnico"
+                tools:layout_editor_absoluteX="82dp"
+                tools:layout_editor_absoluteY="306dp" />
         </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <EditText
+                android:id="@+id/edtNumberLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/edtPasswordLogin"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Numero de Contrato"
+                android:inputType="number"
+                app:layout_constraintBottom_toTopOf="@+id/edtPasswordLogin"
+                app:layout_constraintLeft_toRightOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/txtWelcomeLogin"
+                app:layout_constraintVertical_bias="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+            <EditText
+                android:id="@+id/edtPasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/edtPasswordLogin"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/edtPasswordLogin"
+                app:layout_constraintLeft_toRightOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/txtWelcomeLogin"
+                app:layout_constraintVertical_bias="1.0" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnMainLogin"

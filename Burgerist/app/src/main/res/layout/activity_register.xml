@@ -7,135 +7,170 @@
     android:background="#0085CD"
     tools:context="com.example.bretz.burgerist.RegisterActivity">
 
-    <TextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="169dp"
-        android:layout_height="39dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="¡Bienvenido!"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtRegisterInfo"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="108dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtRegisterInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtWelcome"
-        android:layout_centerHorizontal="true"
-        android:text="Regístrate llenando la información solicitada."
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivandroid"
-        tools:layout_editor_absoluteX="11dp" />
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="¡Bienvenido!"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtRegisterInfo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="108dp" />
 
-    <ImageView
-        android:id="@+id/ivandroid"
-        android:layout_width="161dp"
-        android:layout_height="159dp"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        tools:layout_editor_absoluteX="112dp"
-        app:layout_constraintBottom_toTopOf="@+id/edtUserContract"
-        android:layout_below="@+id/txtRegisterInfo"
-        android:layout_alignEnd="@+id/txtWelcome" />
+        <TextView
+            android:id="@+id/txtRegisterInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtWelcome"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="Regístrate llenando la información solicitada."
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/ivandroid"
+            tools:layout_editor_absoluteX="11dp" />
 
-    <EditText
-        android:id="@+id/edtUserContract"
-        android:layout_width="277dp"
-        android:layout_height="44dp"
-        android:layout_above="@+id/edtUserEmail"
-        android:layout_alignStart="@+id/edtUserEmail"
-        android:ems="10"
-        android:hint="Ingresa tu número de contrato"
-        android:inputType="textPersonName|number"
-        app:layout_constraintBottom_toTopOf="@+id/edtUserEmail"
-        tools:layout_editor_absoluteX="75dp" />
+        <ImageView
+            android:id="@+id/ivandroid"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_alignEnd="@+id/txtWelcome"
+            android:layout_below="@+id/txtRegisterInfo"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/edtUserContract"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            tools:layout_editor_absoluteX="112dp" />
 
-    <EditText
-        android:id="@+id/edtUserEmail"
-        android:layout_width="277dp"
-        android:layout_height="44dp"
-        android:layout_above="@+id/edtUserPass"
-        android:layout_alignStart="@+id/edtUserPass"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="Ingresa tu correo electrónico"
-        android:inputType="textEmailAddress|textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edtUserPass"
-        tools:layout_editor_absoluteX="75dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/edtUserPass"
-        android:layout_width="277dp"
-        android:layout_height="44dp"
-        android:layout_above="@+id/btRegisterUser"
-        android:layout_alignEnd="@+id/txtRegisterInfo"
-        android:layout_marginBottom="49dp"
-        android:layout_marginEnd="13dp"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="Ingresa tu contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
-        tools:layout_editor_absoluteX="75dp" />
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
 
-    <Button
-        android:id="@+id/btnLookForContractNo"
-        android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edtUserContract"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/edtUserEmail"
+                android:layout_alignStart="@+id/edtUserEmail"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ingresa tu número de contrato"
+                android:inputType="textPersonName|number"
+                app:layout_constraintBottom_toTopOf="@+id/edtUserEmail"
+                tools:layout_editor_absoluteX="75dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+            <EditText
+                android:id="@+id/edtUserEmail"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/edtUserPass"
+                android:layout_alignStart="@+id/edtUserPass"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="Ingresa tu correo electrónico"
+                android:inputType="textEmailAddress|textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/edtUserPass"
+                tools:layout_editor_absoluteX="75dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+            <EditText
+                android:id="@+id/edtUserPass"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btRegisterUser"
+                android:layout_alignEnd="@+id/txtRegisterInfo"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="Ingresa tu contraseña"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
+                tools:layout_editor_absoluteX="75dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLookForContractNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Buscar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="143dp" />
+
+        <Button
+            android:id="@+id/btRegisterUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Registrar"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="143dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:text="Buscar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="143dp" />
+        android:baselineAligned="false"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btRegisterUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Registrar"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="143dp" />
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:text="Login" />
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iconEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        tools:layout_editor_absoluteY="333dp"
-        app:layout_constraintRight_toLeftOf="@+id/edtUserEmail"
-        android:layout_marginRight="8dp"
-        android:layout_above="@+id/edtUserPass"
-        android:layout_toStartOf="@+id/edtUserEmail" />
-
-    <ImageView
-        android:id="@+id/iconPass"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        app:srcCompat="@android:drawable/ic_lock_idle_lock"
-        tools:layout_editor_absoluteY="371dp"
-        app:layout_constraintRight_toLeftOf="@+id/edtUserPass"
-        android:layout_marginRight="6dp"
-        android:layout_alignBottom="@+id/edtUserPass"
-        android:layout_toStartOf="@+id/edtUserPass" />
-
-    <ImageView
-        android:id="@+id/iconContract"
-        android:layout_width="48dp"
-        android:layout_height="47dp"
-        android:layout_alignTop="@+id/edtUserContract"
-        android:layout_toStartOf="@+id/edtUserContract"
-        app:layout_constraintRight_toLeftOf="@+id/edtUserContract"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        tools:layout_editor_absoluteY="283dp" />
 </RelativeLayout>
