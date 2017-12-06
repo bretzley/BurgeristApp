@@ -87,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
                                                 String email = user.has("Email") ? user.getString("Email") : "";
                                                 int phone = user.getInt("Phone");
                                                 String image = user.has("Image") ? user.getString("Image") : "";
-                                                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                                                Intent intent;
                                                 if(rbUser.isChecked()) {
+                                                    intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                                                     String address = user.getString("Address");
                                                     Customer customer = new Customer(id, number, name, lastName, email, password, address, phone, image, registered);
                                                     intent.putExtra("data", customer);
                                                     intent.putExtra("user", "customer");
                                                 }else{
+                                                    intent = new Intent(getApplicationContext(), EmployeeProfileActivity.class);
                                                     Employee employee = new Employee(id, number, name, lastName, email, password, phone, image, registered);
                                                     intent.putExtra("data", employee);
                                                     intent.putExtra("user", "employee");

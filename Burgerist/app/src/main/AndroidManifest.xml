@@ -25,7 +25,8 @@
         <activity android:name=".AppointmentActivity" />
         <activity android:name=".AppointmentDetailsActivity" />
         <activity android:name=".AppointmentHistoryActivity" />
-        <activity android:name=".RequestAppointmentActivity"></activity>
+        <activity android:name=".RequestAppointmentActivity" />
+        <activity android:name=".EmployeeProfileActivity"></activity>
     </application>
 
 </manifest>

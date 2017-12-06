@@ -15,8 +15,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private TextView txtUserName, txtUserContract, txtUserPhone, txtUserEmail, btnTest;
     DBHelper db;
-    String contract, email;
-    Customer sessionCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

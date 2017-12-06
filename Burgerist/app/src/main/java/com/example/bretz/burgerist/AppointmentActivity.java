@@ -47,14 +47,13 @@ public class AppointmentActivity extends AppCompatActivity {
         final ArrayList<Appointment> appointments = new ArrayList<>();
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String customerAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/appointment";
-        final Context myContext = this;
-        final String eByEmployeeID = "?EmployeeID=";
-        //employeeCode = getExtra from intent
-        final String _employeeID = "c294b222160018d2";
+        final String appointmentAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/appointment";
+
+        Employee employee = getIntent().getParcelableExtra("data");
+        final String url = appointmentAPI + "?EmployeeID=" + employee.getId();
 
         final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
-                (Request.Method.GET, customerAPI + eByEmployeeID + _employeeID, null, new Response.Listener<JSONArray>() {
+                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                             try {
@@ -74,13 +73,13 @@ public class AppointmentActivity extends AppCompatActivity {
                                 }
                                 apptAdapter.notifyDataSetChanged();
                             } catch (JSONException e) {
-                                makeText(myContext, "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
+                                makeText(getApplicationContext(), "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
                             }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        makeText(myContext, "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT).show();
+                        makeText(getApplicationContext(), "Oops, algo salio mal. Intente en un momento.", LENGTH_SHORT).show();
                     }
                 });
 
