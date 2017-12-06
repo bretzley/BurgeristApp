@@ -26,7 +26,11 @@
         <activity android:name=".AppointmentDetailsActivity" />
         <activity android:name=".AppointmentHistoryActivity" />
         <activity android:name=".RequestAppointmentActivity" />
+<<<<<<< HEAD
         <activity android:name=".EmployeeProfileActivity"></activity>
+=======
+        <activity android:name=".EditProfileActivity"></activity>
+>>>>>>> 6916d042efc1de0d52f82cf56992f9d285dc0099
     </application>
 
 </manifest>

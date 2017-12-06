@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
@@ -34,6 +33,7 @@ public class AppointmentActivity extends AppCompatActivity {
 
     ListView lstAppointments;
     AppointmentAdapter apptAdapter;
+    Button btnBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class AppointmentActivity extends AppCompatActivity {
         lstAppointments = (ListView)findViewById(R.id.lstAppts);
         apptAdapter = new AppointmentAdapter(this);
         lstAppointments.setAdapter(apptAdapter);
+        btnBook = (Button)findViewById(R.id.btnBookAppt);
 
         final ArrayList<Appointment> appointments = new ArrayList<>();
 
@@ -97,6 +98,14 @@ public class AppointmentActivity extends AppCompatActivity {
             }
         });
 
+
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent apptIntent = new Intent(getApplicationContext(), RequestAppointmentActivity.class);
+                startActivity(apptIntent);
+            }
+        });
     }
 
 

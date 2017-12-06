@@ -85,6 +85,8 @@ public class UserLoginActivity extends AppCompatActivity {
                                                 if(user.equals("customer")) {
                                                     String address = rCustomer.getString("Address");
                                                     Customer c = new Customer(id, number, name, lastName, email, password, address, phone, image, registered);
+                                                    Intent apptIntent = new Intent(getApplicationContext(), RequestAppointmentActivity.class);
+                                                    apptIntent.putExtra("data", c);
                                                     intent.putExtra("data", c);
                                                 }else{
                                                     Employee e = new Employee(id, number, name, lastName, email, password, phone, image, registered);
