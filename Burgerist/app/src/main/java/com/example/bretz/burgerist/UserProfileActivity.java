@@ -50,7 +50,7 @@ public class UserProfileActivity extends AppCompatActivity {
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AppointmentActivity.class);
+                Intent i = new Intent(getApplicationContext(), RequestAppointmentActivity.class);
                 startActivity(i);
             }
         });

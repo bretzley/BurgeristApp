@@ -17,16 +17,18 @@ public class Appointment implements Parcelable{
     private String timeSlot;
     private Customer customer;
     private Employee employee;
+    private String folio;
 
     //Constructors
     public Appointment(){}
 
-    public Appointment(String id, String date, String timeSlot, Customer customer, Employee employee){
+    public Appointment(String id, String date, String timeSlot, Customer customer, Employee employee, String folio){
         this.id = id;
         this.date = date;
         this.timeSlot = timeSlot;
         this.customer = customer;
         this.employee = employee;
+        this.folio = folio;
     }
 
     //Setters
@@ -48,6 +50,8 @@ public class Appointment implements Parcelable{
 
     public void setEmployee(Employee employee) { this.employee = employee; }
 
+    public void setFolio(String folio) { this.folio = folio; }
+
     //Getters
     public String getId() {
         return id;
@@ -67,6 +71,8 @@ public class Appointment implements Parcelable{
 
     public Employee getEmployee() { return  employee; }
 
+    public String getFolio() { return  folio; }
+
     //Parcelable
     @Override
     public int describeContents() {
@@ -80,6 +86,7 @@ public class Appointment implements Parcelable{
         dest.writeString(timeSlot);
         dest.writeParcelable(customer, flags);
         dest.writeParcelable(employee, flags);
+        dest.writeString(folio);
     }
 
     protected Appointment(Parcel in) {
@@ -88,6 +95,7 @@ public class Appointment implements Parcelable{
         this.timeSlot = in.readString();
         this.customer = in.readParcelable(getClass().getClassLoader());
         this.employee = in.readParcelable(getClass().getClassLoader());
+        this.folio = in.readString();
     }
 
     public static final Parcelable.Creator<Appointment> CREATOR = new Parcelable.Creator<Appointment>() {

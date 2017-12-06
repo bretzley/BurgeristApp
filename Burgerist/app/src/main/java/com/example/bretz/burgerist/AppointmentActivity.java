@@ -49,30 +49,35 @@ public class AppointmentActivity extends AppCompatActivity {
 
         final RequestQueue queue = Volley.newRequestQueue(this);
         final String appointmentAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/appointment";
-
         Employee employee = getIntent().getParcelableExtra("data");
-        final String url = appointmentAPI + "?EmployeeID=" + employee.getId();
+
+        String url = appointmentAPI + "?{\"Date\":\""+ "2017-12-05" + "\",\"EmployeeID\":\""+ employee.getId() +"\"}";
 
         final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                             try {
-                                apptAdapter.clear();
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject appointment = response.getJSONObject(i);
-                                    String id = appointment.getString("id");
-                                    String date = appointment.getString("Date");
-                                    String timeSlot = appointment.getString("TimeSlotID");
-                                    JSONObject jCustomer = appointment.getJSONObject("CustomerID");
-                                    Customer customer = new Customer(jCustomer);
-                                    JSONObject jEmployee = appointment.getJSONObject("EmployeeID");
-                                    Employee employee = new Employee(jEmployee);
-                                    Appointment apt = new Appointment(id, date, timeSlot, customer, employee);
-                                    appointments.add(apt);
-                                    apptAdapter.add(apt);
+                                if(response.length() > 0) {
+                                    apptAdapter.clear();
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject appointment = response.getJSONObject(i);
+                                        String id = appointment.getString("id");
+                                        String date = appointment.getString("Date");
+                                        String timeSlot = appointment.getString("TimeSlotID");
+                                        JSONObject jCustomer = appointment.getJSONObject("CustomerID");
+                                        Customer customer = new Customer(jCustomer);
+                                        JSONObject jEmployee = appointment.getJSONObject("EmployeeID");
+                                        Employee employee = new Employee(jEmployee);
+                                        String folio = appointment.getString("Folio");
+                                        Appointment apt = new Appointment(id, date, timeSlot, customer, employee, folio);
+                                        appointments.add(apt);
+                                        apptAdapter.add(apt);
+                                    }
+                                    apptAdapter.notifyDataSetChanged();
+                                }else{
+                                    makeText(getApplicationContext(), "No tiene citas para hoy.", LENGTH_SHORT).show();
                                 }
-                                apptAdapter.notifyDataSetChanged();
                             } catch (JSONException e) {
                                 makeText(getApplicationContext(), "Algo salio mal, intente de nuevo.", LENGTH_SHORT).show();
                             }

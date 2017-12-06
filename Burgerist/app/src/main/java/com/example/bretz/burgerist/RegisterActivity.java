@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         }, new Response.ErrorListener() {
                                                             @Override
                                                             public void onErrorResponse(VolleyError error) {
-                                                                makeText(getApplicationContext(), "Problemas de conexión, intente en un momento. PUT", LENGTH_SHORT).show();
+                                                                makeText(getApplicationContext(), "Problemas de conexión, intente en un momento.", LENGTH_SHORT).show();
                                                             }
                                                         });
 
@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    makeText(getApplicationContext(), "Problemas de conexión, intente en un momento." + error.toString(), LENGTH_LONG).show();
+                                    makeText(getApplicationContext(), "Problemas de conexión, intente en un momento.", LENGTH_LONG).show();
                                 }
                             });
 

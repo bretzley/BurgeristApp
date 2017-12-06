@@ -7,67 +7,107 @@
     android:background="#0085CD"
     tools:context="com.example.bretz.burgerist.AppointmentDetailsActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Detalles de Cita"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtUserApptDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="18dp"
-        android:text="Nombre Usuario"
-        android:textColor="@android:color/background_light" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="Detalles de Cita"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/txtContractApptDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtUserApptDetail"
-        android:layout_alignBottom="@+id/txtUserApptDetail"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:text="Numero de Contrato"
-        android:textColor="@android:color/background_light" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtApptDet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtUserApptDetail"
-        android:layout_below="@+id/txtUserApptDetail"
-        android:layout_marginTop="34dp"
-        android:text="Cita"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
+            <TextView
+                android:id="@+id/txtNoContrato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="NoContrato"
+                android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/txtApptDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtApptDet"
-        android:layout_below="@+id/txtApptDet"
-        android:layout_marginTop="24dp"
-        android:text="DETALLES DE LA CITA"
-        android:textColor="@android:color/background_light" />
+            <TextView
+                android:id="@+id/txtFolio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txtUserApptDetail"
+                android:layout_alignBottom="@+id/txtUserApptDetail"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Numero de Contrato"
+                android:textColor="@android:color/background_light" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtApptDet"
-        android:backgroundTint="@android:color/holo_green_dark"
-        app:srcCompat="?android:attr/listDivider" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtApptDet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txtUserApptDetail"
+            android:layout_below="@+id/txtUserApptDetail"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Cita"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txtApptDet"
+            android:layout_below="@+id/txtApptDet"
+            android:layout_marginBottom="5dp"
+            android:text="Fecha"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/txtHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Hora"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txtUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Ubicacion"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txtNotasUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Notas Usuario"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnIniciarTerminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Iniciar"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </RelativeLayout>
