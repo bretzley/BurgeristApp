@@ -4,70 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentRight="false"
     android:background="#0085CD"
     tools:context="com.example.bretz.burgerist.AppointmentActivity">
 
-    <TextView
-        android:id="@+id/txtTitleAppt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Próximas Citas"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
-
-    <ListView
-        android:id="@+id/lstAppts"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnBookAppt"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtNombreCitas" />
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtNombreCitas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_toEndOf="@+id/imageView7"
-        android:text="NombreDeUsuario"
-        android:textColor="@android:color/background_light" />
+        <TextView
+            android:id="@+id/txtTitleAppt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="Próximas Citas"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/txtContratoCitas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
-        android:text="NumeroDeContrato"
-        android:textColor="@android:color/background_light" />
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView4"
+            android:layout_alignParentEnd="false"
+            android:layout_marginBottom="10dp"
+            android:gravity="right"
+            android:text="Date"
+            android:textColor="@android:color/background_light" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTitleAppt"
-        android:layout_toStartOf="@+id/txtContratoCitas"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignTop="@+id/txtNombreCitas"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <Button
-        android:id="@+id/btnBookAppt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/imageView4"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Agendar Visita"
-        android:textColor="@android:color/background_light" />
+        <ListView
+            android:id="@+id/lstAppts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnBookAppt"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtNombreCitas" />
+    </LinearLayout>
 
 </RelativeLayout>

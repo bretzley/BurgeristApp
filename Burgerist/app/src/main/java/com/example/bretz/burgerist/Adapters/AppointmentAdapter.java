@@ -25,6 +25,7 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
         TextView txtCustomer = (TextView) oView.findViewById(R.id.txtCustomer);
         TextView txtDate = (TextView) oView.findViewById(R.id.txtDate);
         TextView txtTimeFrame = (TextView) oView.findViewById(R.id.txtTimeFrame);
+        TextView txtStatus = (TextView) oView.findViewById(R.id.txtStatus);
 
 
         Appointment oAppointment = this.getItem(position);
@@ -33,6 +34,15 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
         txtCustomer.setText("Cliente: " + oAppointment.getCustomer().getName());
         txtDate.setText("Fecha: " + oAppointment.getDate().toString());
         txtTimeFrame.setText("Horario: " + oAppointment.getTimeSlot());
+        String status="";
+        if(oAppointment.getAptDetail().getFinished())
+            status = "Terminado";
+        else if(oAppointment.getAptDetail().getStarted())
+            status = "En proceso";
+        else
+            status = "Pendiente";
+
+        txtTimeFrame.setText("Status: " + status);
 
         return oView;
     }

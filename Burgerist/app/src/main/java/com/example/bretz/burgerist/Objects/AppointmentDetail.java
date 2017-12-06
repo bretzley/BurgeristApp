@@ -3,6 +3,9 @@ package com.example.bretz.burgerist.Objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by bretz on 11/24/2017.
  */
@@ -10,7 +13,6 @@ import android.os.Parcelable;
 public class AppointmentDetail implements Parcelable{
     //Properties
     private String apptDetalID;
-    private String apptID;
     private String location;
     private String startTime;
     private String endTime;
@@ -23,9 +25,8 @@ public class AppointmentDetail implements Parcelable{
     //Constructors
     public AppointmentDetail(){}
 
-    public AppointmentDetail(String apptDetalID, String apptID, String location, String startTime, String endTime, String techNotes, String customerNotes, int rating, boolean started, boolean finished){
+    public AppointmentDetail(String apptDetalID, String location, String startTime, String endTime, String techNotes, String customerNotes, int rating, boolean started, boolean finished){
         this.apptDetalID = apptDetalID;
-        this.apptID = apptID;
         this.startTime = startTime;
         this.endTime = endTime;
         this.techNotes = techNotes;
@@ -36,13 +37,26 @@ public class AppointmentDetail implements Parcelable{
         this.finished = finished;
     }
 
+    public AppointmentDetail(JSONObject jCustomer){
+        try {
+            this.apptDetalID = jCustomer.getString("id");
+            this.location = jCustomer.has("Location") ? jCustomer.getString("Location") : "";
+            this.startTime = jCustomer.has("StartTime") ? jCustomer.getString("StartTime") : "";
+            this.endTime = jCustomer.has("EndTime") ? jCustomer.getString("EndTime") : "";
+            this.techNotes = jCustomer.has("TechNotes") ? jCustomer.getString("TechNotes") : "";
+            this.customerNotes = jCustomer.has("CustomerNotes") ? jCustomer.getString("CustomerNotes") : "";
+            this.rating = jCustomer.has("Rating") ? jCustomer.getInt("Rating") : 0;
+            this.started = jCustomer.has("Started") ? jCustomer.getBoolean("Started") : false;
+            this.finished = jCustomer.has("Finished") ? jCustomer.getBoolean("Finished") : false;
+        }
+        catch(JSONException e){
+
+        }
+    }
+
     //Setters
     public void setApptDetalID(String apptDetalID) {
         this.apptDetalID = apptDetalID;
-    }
-
-    public void setApptID(String apptID) {
-        this.apptID = apptID;
     }
 
     public void setLocation(String location) {
@@ -77,14 +91,9 @@ public class AppointmentDetail implements Parcelable{
         this.finished = finished;
     }
 
-
     //Getters
     public String getApptDetalID() {
         return apptDetalID;
-    }
-
-    public String getApptID() {
-        return apptID;
     }
 
     public String getLocation() {
@@ -128,7 +137,6 @@ public class AppointmentDetail implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(apptDetalID);
-        dest.writeString(apptID);
         dest.writeString(location);
         dest.writeString(startTime);
         dest.writeString(endTime);
@@ -141,7 +149,6 @@ public class AppointmentDetail implements Parcelable{
 
     public AppointmentDetail(Parcel in) {
         this.apptDetalID = in.readString();
-        this.apptID = in.readString();
         this.location = in.readString();
         this.startTime = in.readString();
         this.endTime = in.readString();

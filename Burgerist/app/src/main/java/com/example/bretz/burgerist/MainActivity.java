@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         if (buttonView.getId() == R.id.rbUser)
                             edtNumberLogin.setHint("Número de Contrato");
                         else
-                            edtNumberLogin.setHint("Núsmero de Empleado");
+                            edtNumberLogin.setHint("Número de Empleado");
                     }
                 }
             };

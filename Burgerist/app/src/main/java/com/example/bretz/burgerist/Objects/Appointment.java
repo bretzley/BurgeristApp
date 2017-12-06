@@ -17,17 +17,19 @@ public class Appointment implements Parcelable{
     private String timeSlot;
     private Customer customer;
     private Employee employee;
+    private AppointmentDetail aptDetail;
     private String folio;
 
     //Constructors
     public Appointment(){}
 
-    public Appointment(String id, String date, String timeSlot, Customer customer, Employee employee, String folio){
+    public Appointment(String id, String date, String timeSlot, Customer customer, Employee employee, AppointmentDetail aptDetail, String folio){
         this.id = id;
         this.date = date;
         this.timeSlot = timeSlot;
         this.customer = customer;
         this.employee = employee;
+        this.aptDetail = aptDetail;
         this.folio = folio;
     }
 
@@ -50,6 +52,8 @@ public class Appointment implements Parcelable{
 
     public void setEmployee(Employee employee) { this.employee = employee; }
 
+    public void setAptDetail(AppointmentDetail aptDetail) { this.aptDetail = aptDetail; }
+
     public void setFolio(String folio) { this.folio = folio; }
 
     //Getters
@@ -69,7 +73,9 @@ public class Appointment implements Parcelable{
         return customer;
     }
 
-    public Employee getEmployee() { return  employee; }
+    public Employee getEmployee() { return employee; }
+
+    public AppointmentDetail getAptDetail() { return aptDetail; }
 
     public String getFolio() { return  folio; }
 
@@ -86,6 +92,7 @@ public class Appointment implements Parcelable{
         dest.writeString(timeSlot);
         dest.writeParcelable(customer, flags);
         dest.writeParcelable(employee, flags);
+        dest.writeParcelable(aptDetail, flags);
         dest.writeString(folio);
     }
 
@@ -95,6 +102,7 @@ public class Appointment implements Parcelable{
         this.timeSlot = in.readString();
         this.customer = in.readParcelable(getClass().getClassLoader());
         this.employee = in.readParcelable(getClass().getClassLoader());
+        this.aptDetail = in.readParcelable(getClass().getClassLoader());
         this.folio = in.readString();
     }
 

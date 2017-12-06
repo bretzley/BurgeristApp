@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bretz.burgerist.Adapters.AppointmentAdapter;
 import com.example.bretz.burgerist.Objects.Appointment;
+import com.example.bretz.burgerist.Objects.AppointmentDetail;
 import com.example.bretz.burgerist.Objects.Customer;
 import com.example.bretz.burgerist.Objects.Employee;
 
@@ -24,7 +26,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
@@ -33,7 +38,8 @@ public class AppointmentActivity extends AppCompatActivity {
 
     ListView lstAppointments;
     AppointmentAdapter apptAdapter;
-    Button btnBook;
+    TextView txtDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,7 @@ public class AppointmentActivity extends AppCompatActivity {
         lstAppointments = (ListView)findViewById(R.id.lstAppts);
         apptAdapter = new AppointmentAdapter(this);
         lstAppointments.setAdapter(apptAdapter);
-        btnBook = (Button)findViewById(R.id.btnBookAppt);
+        txtDate = (TextView)findViewById(R.id.txtDate);
 
         final ArrayList<Appointment> appointments = new ArrayList<>();
 
@@ -51,7 +57,12 @@ public class AppointmentActivity extends AppCompatActivity {
         final String appointmentAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/appointment";
         Employee employee = getIntent().getParcelableExtra("data");
 
-        String url = appointmentAPI + "?{\"Date\":\""+ "2017-12-05" + "\",\"EmployeeID\":\""+ employee.getId() +"\"}";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String dateStr = dateFormat.format(date);
+
+        txtDate.setText(dateStr);
+        String url = appointmentAPI + "?{\"Date\":\""+ dateStr + "\",\"EmployeeID\":\""+ employee.getId() +"\"}";
 
         final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -69,8 +80,10 @@ public class AppointmentActivity extends AppCompatActivity {
                                         Customer customer = new Customer(jCustomer);
                                         JSONObject jEmployee = appointment.getJSONObject("EmployeeID");
                                         Employee employee = new Employee(jEmployee);
+                                        JSONObject jApptDetail = appointment.getJSONObject("ApptDetID");
+                                        AppointmentDetail apptDetail = new AppointmentDetail(jApptDetail);
                                         String folio = appointment.getString("Folio");
-                                        Appointment apt = new Appointment(id, date, timeSlot, customer, employee, folio);
+                                        Appointment apt = new Appointment(id, date, timeSlot, customer, employee, apptDetail, folio);
                                         appointments.add(apt);
                                         apptAdapter.add(apt);
                                     }
@@ -91,8 +104,6 @@ public class AppointmentActivity extends AppCompatActivity {
 
         queue.add(jsonGetCustomerRequest);
 
-
-
         lstAppointments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -103,14 +114,13 @@ public class AppointmentActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-        btnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent apptIntent = new Intent(getApplicationContext(), RequestAppointmentActivity.class);
-                startActivity(apptIntent);
-            }
-        });
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
     }
 
 
