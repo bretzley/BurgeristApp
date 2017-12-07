@@ -30,7 +30,7 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
 
         Appointment oAppointment = this.getItem(position);
 
-        txtFolio.setText("Folio: " + oAppointment.getId());
+        txtFolio.setText("Folio: " + oAppointment.getFolio());
         txtCustomer.setText("Cliente: " + oAppointment.getCustomer().getName());
         txtDate.setText("Fecha: " + oAppointment.getDate().toString());
         txtTimeFrame.setText("Horario: " + oAppointment.getTimeSlot());
@@ -42,7 +42,7 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
         else
             status = "Pendiente";
 
-        txtTimeFrame.setText("Status: " + status);
+        txtStatus.setText("Status: " + status);
 
         return oView;
     }

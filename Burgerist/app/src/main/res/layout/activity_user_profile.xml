@@ -8,164 +8,142 @@
     android:orientation="vertical"
     tools:context="com.example.bretz.burgerist.UserProfileActivity">
 
-    <TextView
-        android:id="@+id/txtWelcomee"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginRight="5dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_menu_manage" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="90dp"
-        android:text="BIENVENIDO"
-        android:textColor="@android:color/background_light"
-        android:textSize="36sp"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
-        android:layout_height="194dp"
-        android:layout_below="@+id/txtWelcomee"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="69dp" />
+        <TextView
+            android:id="@+id/txtWelcomee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="90dp"
+            android:text="BIENVENIDO"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="16dp" />
 
-    <TextView
-        android:id="@+id/txtUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtUserContract"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="79dp"
-        android:baselineAligned="false"
-        android:text="User's Name"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="302dp" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@+id/txtWelcomee"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="69dp" />
 
-    <TextView
-        android:id="@+id/txtUserContract"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtUserPhone"
-        android:layout_alignEnd="@+id/txtUserName"
-        android:layout_alignStart="@+id/txtUserName"
-        android:text="User's Contract"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="344dp" />
+        <TextView
+            android:id="@+id/txtUserContract"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtUserPhone"
+            android:layout_alignEnd="@+id/txtUserName"
+            android:layout_alignStart="@+id/txtUserName"
+            android:gravity="center_horizontal"
+            android:text="User's Contract"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="111dp"
+            tools:layout_editor_absoluteY="344dp" />
 
-    <TextView
-        android:id="@+id/txtUserPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtUserEmail"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/txtUserContract"
-        android:text="User's Phone"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="385dp" />
+        <TextView
+            android:id="@+id/txtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtUserContract"
+            android:layout_alignParentStart="true"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:text="User's Name"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="125dp"
+            tools:layout_editor_absoluteY="302dp" />
 
-    <TextView
-        android:id="@+id/txtUserEmail"
+        <TextView
+            android:id="@+id/txtUserPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtUserEmail"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/txtUserContract"
+            android:gravity="center_horizontal"
+            android:text="User's Phone"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="124dp"
+            tools:layout_editor_absoluteY="385dp" />
+
+        <TextView
+            android:id="@+id/txtUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/txtUserPhone"
+            android:gravity="center_horizontal"
+            android:text="User's Email"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="128dp"
+            tools:layout_editor_absoluteY="426dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtUserPhone"
-        android:layout_marginBottom="101dp"
-        android:text="User's Email"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="426dp" />
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imgDivider"
-        android:layout_marginEnd="14dp"
-        android:layout_toStartOf="@+id/txtUserContract"
-        app:srcCompat="@mipmap/ic_launcher" />
+        <Button
+            android:id="@+id/btnSeePastApptointments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Ver Citas Previas"
+            android:textColor="@android:color/white" />
 
-    <ImageView
-        android:id="@+id/imgDivider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtUserName"
-        android:visibility="visible"
-        app:srcCompat="?attr/dividerHorizontal" />
+        <Button
+            android:id="@+id/btnSeeAppointments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Ver Citas"
+            android:textColor="@android:color/white" />
 
-    <ImageView
-        android:id="@+id/imgDivider4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtUserPhone"
-        android:visibility="visible"
-        app:srcCompat="?attr/dividerHorizontal" />
-
-    <ImageView
-        android:id="@+id/imgDivider2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtUserPhone"
-        android:layout_alignParentStart="true"
-        android:visibility="visible"
-        app:srcCompat="?attr/dividerHorizontal" />
-
-    <ImageView
-        android:id="@+id/imgDivider3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtUserPhone"
-        android:layout_marginTop="30dp"
-        android:visibility="visible"
-        app:srcCompat="?attr/dividerHorizontal" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView8"
-        android:layout_alignStart="@+id/imageView8"
-        android:layout_below="@+id/imgDivider"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imgDivider4"
-        android:layout_alignEnd="@+id/imageView10"
-        android:layout_alignStart="@+id/imageView10"
-        android:layout_below="@+id/imageView10"
-        app:srcCompat="@android:drawable/stat_sys_speakerphone" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView11"
-        android:layout_alignStart="@+id/imageView11"
-        android:layout_below="@+id/imageView11"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtUserName"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="39dp"
-        android:text="Button" />
+        <Button
+            android:id="@+id/btnCreateAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Crear cita"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </RelativeLayout>
