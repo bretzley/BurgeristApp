@@ -12,6 +12,9 @@ public class TimeSlot implements Parcelable {
     private String id;
     private String timeFrame;
 
+    //Constructors
+    public TimeSlot() {}
+
     //Setters
     public void setId(String id) {
         this.id = id;

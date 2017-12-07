@@ -7,93 +7,141 @@
     android:background="#0085CD"
     tools:context="com.example.bretz.burgerist.RequestAppointmentActivity">
 
-    <TextView
-        android:id="@+id/txtTitleBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Agendar Cita"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/btnBookAppt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Confirmar selección"
-        android:textColor="@android:color/background_light" />
-
-    <EditText
-        android:id="@+id/edtApptNotes"
+    <LinearLayout
+        android:id="@+id/layoutPickDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnBookAppt"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:hint="Ingresa notas para el técnico"
-        android:inputType="textMultiLine"
-        android:textColor="@android:color/background_light"
-        android:textColorHint="@android:color/darker_gray" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edtApptNotes"
-        android:layout_alignParentStart="true"
-        android:text="Notas:"
-        android:textColor="@android:color/background_light" />
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtTitleSelected"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtTitleBook"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0"
+            android:spinnersShown="false"
+            android:splitMotionEvents="false"
+            android:startYear="2017" />
 
-    <EditText
-        android:id="@+id/edtApptSelected"
+        <Button
+            android:id="@+id/btnPickDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="0"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Seleccionar fecha"
+            android:textColor="@android:color/background_light" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBookAppt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Cita seleccionada"
-        android:inputType="datetime"
-        android:textColor="@android:color/background_light"
-        android:textColorHint="@android:color/darker_gray" />
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtTitleSelected"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtTitleBook" />
+        <TextView
+            android:id="@+id/txtTitleBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Agendar Cita"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/txtTitleSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edtApptSelected"
-        android:layout_alignParentStart="true"
-        android:text="Fecha seleccionada:"
-        android:textColor="@android:color/background_light" />
+        <TextView
+            android:id="@+id/txtTitleSelected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/edtApptSelected"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="Fecha seleccionada:"
+            android:textColor="@android:color/background_light" />
 
-    <Spinner
-        android:id="@+id/spnTimeSlots"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTitleBook"
-        android:layout_marginTop="55dp"
-        android:layout_toEndOf="@+id/datePicker" />
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="TextView"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/txtTitleTimeSlot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTitleBook"
-        android:layout_marginTop="28dp"
-        android:layout_toEndOf="@+id/datePicker"
-        android:text="Selecciona la hora de tu cita>"
-        android:textColor="@android:color/background_light" />
+        <TextView
+            android:id="@+id/txtTitleTimeSlot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitleBook"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/datePicker"
+            android:text="Seleccione la hora de su cita:"
+            android:textColor="@android:color/background_light" />
+
+        <Spinner
+            android:id="@+id/spnTimeSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitleBook"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@+id/datePicker" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/edtApptNotes"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="Notas:"
+            android:textColor="@android:color/background_light" />
+
+        <EditText
+            android:id="@+id/edtApptNotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnBookAppt"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Ingrese notas para el técnico"
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/btnChangeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Cambiar fecha"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/btnBookAppt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Confirmar selección"
+            android:textColor="@android:color/background_light" />
+
+    </LinearLayout>
 
 </RelativeLayout>

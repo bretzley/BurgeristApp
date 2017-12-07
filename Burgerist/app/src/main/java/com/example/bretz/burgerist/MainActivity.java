@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bretz.burgerist.Objects.Customer;
 import com.example.bretz.burgerist.Objects.Employee;
+import com.example.bretz.burgerist.Utils.DBHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup rgLogin;
     TextView txtRegister;
     EditText edtNumberLogin, edtPasswordLogin;
+    DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnMainLogin);
         edtNumberLogin = (EditText) findViewById(R.id.edtNumberLogin);
         edtPasswordLogin = (EditText) findViewById(R.id.edtPasswordLogin);
+        db = new DBHelper(this);
 
         rbUser.setOnCheckedChangeListener(radioListener);
         rbTec.setOnCheckedChangeListener(radioListener);
@@ -56,7 +59,35 @@ public class MainActivity extends AppCompatActivity {
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         final String customerAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/customer";
         final String employeeAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/employee";
+        final String timeSlotsAPI = "http://ec2-34-226-122-227.compute-1.amazonaws.com:2403/timeslot";
 
+        final JsonArrayRequest jsonGetCustomerRequest = new JsonArrayRequest
+                (Request.Method.GET, timeSlotsAPI, null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        db.open();
+                        db.deleteAllTimeSlots();
+                        for (int i = 0; i < response.length(); i++){
+                            try {
+                                JSONObject timeSlot = response.getJSONObject(i);
+                                String id = timeSlot.getString("id");
+                                String timeFrame = timeSlot.getString("TimeFrame");
+                                db.addTimeSlot(id, timeFrame);
+                            } catch (JSONException e) {
+                                db.close();
+                                makeText(getApplicationContext(), "Algo salió mal, intente de nuevo.", LENGTH_SHORT).show();
+                            }
+                        }
+                        db.close();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        makeText(getApplicationContext(), "Hay problemas de conexión, intente en un momento.", LENGTH_SHORT).show();
+                    }
+                });
+
+        queue.add(jsonGetCustomerRequest);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +119,13 @@ public class MainActivity extends AppCompatActivity {
                                                 int phone = user.getInt("Phone");
                                                 String image = user.has("Image") ? user.getString("Image") : "";
                                                 Intent intent;
-                                                if(rbUser.isChecked()) {
+                                                if (rbUser.isChecked()) {
                                                     intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                                                     String address = user.getString("Address");
                                                     Customer customer = new Customer(id, number, name, lastName, email, password, address, phone, image, registered);
                                                     intent.putExtra("data", customer);
                                                     intent.putExtra("user", "customer");
-                                                }else{
+                                                } else {
                                                     intent = new Intent(getApplicationContext(), EmployeeProfileActivity.class);
                                                     Employee employee = new Employee(id, number, name, lastName, email, password, phone, image, registered);
                                                     intent.putExtra("data", employee);
@@ -102,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                                                 }
                                                 startActivity(intent);
                                             } else
-                                                makeText(getApplicationContext(),"Número o contraseña incorrectos.", LENGTH_SHORT).show();
+                                                makeText(getApplicationContext(), "Número o contraseña incorrectos.", LENGTH_SHORT).show();
                                         } catch (JSONException e) {
                                             makeText(getApplicationContext(), "Algo salió mal, intente de nuevo.", LENGTH_SHORT).show();
                                         }
@@ -122,9 +153,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        txtRegister.setOnClickListener(new View.OnClickListener(){
+        txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
@@ -133,16 +164,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    final CompoundButton.OnCheckedChangeListener radioListener = new CompoundButton.OnCheckedChangeListener(){
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                {
-                    if (isChecked) {
-                        if (buttonView.getId() == R.id.rbUser)
-                            edtNumberLogin.setHint("Número de Contrato");
-                        else
-                            edtNumberLogin.setHint("Número de Empleado");
-                    }
-                }
-            };
+    final CompoundButton.OnCheckedChangeListener radioListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                if (buttonView.getId() == R.id.rbUser)
+                    edtNumberLogin.setHint("Número de Contrato");
+                else
+                    edtNumberLogin.setHint("Número de Empleado");
+            }
+        }
+    };
 }

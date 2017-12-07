@@ -9,7 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.bretz.burgerist.Objects.Appointment;
 import com.example.bretz.burgerist.Objects.Customer;
 import com.example.bretz.burgerist.Objects.Employee;
+import com.example.bretz.burgerist.Objects.TimeSlot;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -57,6 +60,11 @@ public class DBHelper {
 
             };
 
+    private String[] TIMESLOT_TABLE_COLUMNS =
+            {
+                    DBUtils.TIMESLOT_ID,
+                    DBUtils.TIMESLOT_TIMEFRAME
+            };
 
     public DBHelper(Context context) {
         dbHelper = new DBUtils(context);
@@ -147,48 +155,6 @@ public class DBHelper {
         return x > 0;
     }
 
-    /*
-    public String registerCustomer(int ContranctNumber, String Email, String Password){
-        String message = "";
-        Cursor cursor = database.query(DBUtils.CUSTOMER_TABLE,
-                CUSTOMER_TABLE_COLUMNS,
-                DBUtils.CUSTOMER_CONTRACT + " = " + ContranctNumber,
-                null, null, null, null);
-        if (cursor.getCount() == 1) {
-            cursor.moveToFirst();
-            Customer c = parseCustomer(cursor);
-            if (c.getContractNumber().equals(ContranctNumber + "")) {
-                c.setEmail(Email);
-                c.setPassword(Password);
-                database.update(DBUtils.CUSTOMER_TABLE, getCustomerValues(c), DBUtils.CUSTOMER_ID + " = " + c.getId(), null);
-                message = "Success";
-            } else {
-                message = "Contract Number Doesn't Exist";
-            }
-        } else {
-            message = "Contract Number Doesn't Exist";
-        }
-        cursor.close();
-        return message;
-    }
-
-    private ContentValues getCustomerValues(Customer oCustomer) {
-        ContentValues values = new ContentValues();
-        values.put(DBUtils.CUSTOMER_ID, oCustomer.getId());
-        values.put(DBUtils.CUSTOMER_CONTRACT, oCustomer.getContractNumber());
-        values.put(DBUtils.CUSTOMER_NAME, oCustomer.getName());
-        values.put(DBUtils.CUSTOMER_LASTNAME, oCustomer.getLastName());
-        values.put(DBUtils.CUSTOMER_EMAIL, oCustomer.getEmail());
-        values.put(DBUtils.CUSTOMER_PASSWORD, oCustomer.getPassword());
-        values.put(DBUtils.CUSTOMER_ADDRESS, oCustomer.getAddress());
-        values.put(DBUtils.CUSTOMER_PHONE, oCustomer.getPhone());
-        values.put(DBUtils.CUSTOMER_IMAGE, oCustomer.getCustomerImage());
-        values.put(DBUtils.CUSTOMER_REGISTERED, oCustomer.getRegistered());
-
-        return values;
-    }
-    */
-
     public Employee addEmployee(String Id, int EmployeeCode, String Name, String LastName, String Email, String Password, int Phone, String EmployeeImage, Boolean Registered) {
         ContentValues values = new ContentValues();
         values.put(DBUtils.EMPLOYEE_ID, Id);
@@ -219,6 +185,51 @@ public class DBHelper {
         Employee employee = parseEmployee(cursor);
         cursor.close();
         return employee;
+    }
+
+    public String getTimeSlotIdByTimeFrame(String timeFrame) {
+        Cursor cursor = database.query(DBUtils.TIMESLOT_TABLE,
+                TIMESLOT_TABLE_COLUMNS,
+                DBUtils.TIMESLOT_TIMEFRAME + " =?",
+                new String[] {timeFrame}, null, null, null);
+        cursor.moveToFirst();
+        String id = cursor.getString(cursor.getColumnIndex(DBUtils.TIMESLOT_ID));
+        cursor.close();
+        return id;
+    }
+
+    public TimeSlot addTimeSlot(String Id, String TimeFrame) {
+        ContentValues values = new ContentValues();
+        values.put(DBUtils.TIMESLOT_ID, Id);
+        values.put(DBUtils.TIMESLOT_TIMEFRAME, TimeFrame);
+
+        database.insert(DBUtils.TIMESLOT_TABLE, null, values);
+
+        Cursor cursor = database.query(DBUtils.TIMESLOT_TABLE,
+                TIMESLOT_TABLE_COLUMNS,
+                DBUtils.TIMESLOT_ID + " =?",
+                new String[]{Id}, null, null, null);
+        cursor.moveToFirst();
+        TimeSlot timeSlot = parseTimeSlot(cursor);
+        cursor.close();
+        return timeSlot;
+    }
+
+    public void deleteAllTimeSlots(){
+        database.delete(DBUtils.TIMESLOT_TABLE,null, null);
+    }
+
+    public ArrayList<String> getAllTimeSlots() {
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.query(DBUtils.TIMESLOT_TABLE, TIMESLOT_TABLE_COLUMNS, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex(DBUtils.TIMESLOT_TIMEFRAME)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
     }
 
     private Customer parseCustomer(Cursor cursor) {
@@ -257,5 +268,12 @@ public class DBHelper {
         appointment.setCustomer(getCustomerByID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_CUSTOMERID))));
         appointment.setEmployee(getEmployeeByID(cursor.getString(cursor.getColumnIndex(DBUtils.APPOINTMENT_EMPLOYEEID))));
         return appointment;
+    }
+
+    private TimeSlot parseTimeSlot(Cursor cursor){
+        TimeSlot timeSlot = new TimeSlot();
+        timeSlot.setId(cursor.getString(cursor.getColumnIndex(DBUtils.TIMESLOT_ID)));
+        timeSlot.setTimeFrame(cursor.getString(cursor.getColumnIndex(DBUtils.TIMESLOT_TIMEFRAME)));
+        return timeSlot;
     }
 }
