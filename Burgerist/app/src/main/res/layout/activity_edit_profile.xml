@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0085CD"
     tools:context="com.example.bretz.burgerist.EditProfileActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imgDroid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitleEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/txtTitleEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Editar Perfil"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txtTitleEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imgDroid"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="41dp"
+        android:text="Correo electrónico:"
+        android:textColor="@android:color/background_light" />
+
+    <EditText
+        android:id="@+id/edtPrEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtTitleEmail"
+        android:layout_below="@+id/txtTitleEmail"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/txtTitlePass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edtPrEmail"
+        android:layout_below="@+id/edtPrEmail"
+        android:text="Password:"
+        android:textColor="@android:color/background_light" />
+
+    <EditText
+        android:id="@+id/edtPrPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtTitlePass"
+        android:layout_below="@+id/txtTitlePass"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/txtTitleAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edtPrAddress"
+        android:layout_below="@+id/edtPrPassword"
+        android:text="Dirección:"
+        android:textColor="@android:color/background_light" />
+
+    <EditText
+        android:id="@+id/edtPrAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edtPrPassword"
+        android:layout_below="@+id/txtTitleAddress"
+        android:ems="10"
+        android:inputType="textPostalAddress" />
+
+    <TextView
+        android:id="@+id/txtTitlePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edtPrAddress"
+        android:layout_below="@+id/edtPrAddress"
+        android:text="Telefono:"
+        android:textColor="@android:color/background_light" />
+
+    <EditText
+        android:id="@+id/edtPrPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtTitlePhone"
+        android:layout_below="@+id/txtTitlePhone"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnEdtProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="Guardar cambios" />
+</RelativeLayout>
